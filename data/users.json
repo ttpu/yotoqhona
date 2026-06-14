@@ -28,5 +28,15 @@
     "status": "ACTIVE",
     "verified": false,
     "createdAt": "2026-06-14T11:05:21.376Z"
+  },
+  {
+    "id": "5bc2b498-f82b-4666-abd3-d05ebb00feba",
+    "email": "profasstor@gmail.co",
+    "passwordHash": "$2b$10$1cFez50oDB/TCqL.bFphYOAPfVw4xOYhK9tnRJeE4brqBK/rlsAHC",
+    "displayName": "Ayyubxon Koriev",
+    "role": "PRIVATE_PROVIDER",
+    "status": "PENDING_VERIFICATION",
+    "verified": false,
+    "createdAt": "2026-06-14T11:21:37.199Z"
   }
 ]
