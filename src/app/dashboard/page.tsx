@@ -14,8 +14,8 @@ const roles = [
   },
   {
     title: "Private Landlord Dashboard",
-    path: "/dashboard/admin?mode=landlord" as Route,
-    details: "Property listings, availability, tenant approvals"
+    path: "/dashboard/provider?status=PENDING_VERIFICATION&type=PRIVATE&oneid=required" as Route,
+    details: "Property listings, verification status, tenant approvals"
   },
   {
     title: "Super Admin Panel",

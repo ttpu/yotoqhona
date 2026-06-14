@@ -25,54 +25,56 @@ export default function CatalogPage({ searchParams }: { searchParams: SearchPara
 
   return (
     <main>
-      <h1>Housing Catalog</h1>
-      <p className="muted">Filter by location, housing type, gender policy, price range, and verified status.</p>
+      <section className="page-heading">
+        <h1>Turar joy katalogi</h1>
+        <p className="muted">Shahar, uy-joy turi, narx oralig&#39;i va tasdiqlangan status bo&#39;yicha mos variantlarni toping.</p>
+      </section>
 
-      <form className="card grid grid-4" action="/catalog" method="GET" style={{ marginBottom: 16 }}>
+      <form className="card filter-panel grid grid-4" action="/catalog" method="GET" style={{ marginBottom: 16 }}>
         <div>
-          <label htmlFor="city">City</label>
-          <input id="city" name="city" placeholder="Tashkent" defaultValue={searchParams.city} />
+          <label htmlFor="city">Shahar</label>
+          <input id="city" name="city" placeholder="Toshkent" defaultValue={searchParams.city} />
         </div>
         <div>
-          <label htmlFor="type">Housing Type</label>
+          <label htmlFor="type">Uy-joy turi</label>
           <select id="type" name="type" defaultValue={searchParams.type ?? ""}>
-            <option value="">All</option>
-            <option value="DORMITORY">Dormitory</option>
-            <option value="HOSTEL">Hostel</option>
-            <option value="APARTMENT">Apartment</option>
+            <option value="">Barchasi</option>
+            <option value="DORMITORY">Yotoqxona</option>
+            <option value="HOSTEL">Xostel</option>
+            <option value="APARTMENT">Kvartira</option>
           </select>
         </div>
         <div>
-          <label htmlFor="gender">Gender</label>
+          <label htmlFor="gender">Jins</label>
           <select id="gender" name="gender" defaultValue={searchParams.gender ?? ""}>
-            <option value="">Any</option>
-            <option value="MALE">Male</option>
-            <option value="FEMALE">Female</option>
+            <option value="">Farqi yo&#39;q</option>
+            <option value="MALE">Erkak</option>
+            <option value="FEMALE">Ayol</option>
           </select>
         </div>
         <div>
-          <label htmlFor="university">University</label>
+          <label htmlFor="university">Universitet</label>
           <input id="university" name="university" placeholder="TUIT" defaultValue={searchParams.university} />
         </div>
         <div>
-          <label htmlFor="minPrice">Min Price</label>
+          <label htmlFor="minPrice">Minimal narx</label>
           <input id="minPrice" name="minPrice" type="number" defaultValue={searchParams.minPrice} />
         </div>
         <div>
-          <label htmlFor="maxPrice">Max Price</label>
+          <label htmlFor="maxPrice">Maksimal narx</label>
           <input id="maxPrice" name="maxPrice" type="number" defaultValue={searchParams.maxPrice} />
         </div>
         <div>
-          <label htmlFor="verified">Verified</label>
+          <label htmlFor="verified">Tasdiqlangan</label>
           <select id="verified" name="verified" defaultValue={searchParams.verified ?? ""}>
-            <option value="">Any</option>
-            <option value="true">Verified only</option>
-            <option value="false">Non-verified</option>
+            <option value="">Barchasi</option>
+            <option value="true">Faqat tasdiqlangan</option>
+            <option value="false">Tasdiqlanmagan</option>
           </select>
         </div>
         <div style={{ alignSelf: "end" }}>
           <button className="btn btn-primary" type="submit">
-            Apply filters
+            Filtrlarni qo&#39;llash
           </button>
         </div>
       </form>
@@ -80,40 +82,40 @@ export default function CatalogPage({ searchParams }: { searchParams: SearchPara
       <section className="grid grid-3">
         {items.map((item) => {
           const availability =
-            item.availableBeds > 0 ? "Available" : item.type === "HOSTEL" ? "Queue Available" : "Full";
+            item.availableBeds > 0 ? "Bo&#39;sh joy bor" : item.type === "HOSTEL" ? "Navbat mavjud" : "To&#39;lgan";
 
           return (
-            <article key={item.id} className="card">
+            <article key={item.id} className="card property-card">
               <img src={item.images[0]} alt={item.name} className="property-image" />
               <h3>{item.name}</h3>
               <p className="muted">
                 {typeLabel(item.type)} · {item.city} · {item.distanceKm} km
               </p>
               <div className="kv">
-                <span>Monthly price</span>
+                <span>Oylik narx</span>
                 <strong>{formatMoney(item.monthlyPrice)}</strong>
               </div>
               <div className="kv">
-                <span>Available beds</span>
+                <span>Bo&#39;sh o&#39;rinlar</span>
                 <strong>{item.availableBeds}</strong>
               </div>
               <div className="kv">
-                <span>Status</span>
+                <span>Holati</span>
                 <strong>{availability}</strong>
               </div>
               <div className="kv">
-                <span>Rating</span>
+                <span>Reyting</span>
                 <strong>{item.rating}</strong>
               </div>
               <p>
                 {item.verified ? (
-                  <span className="badge badge-verified">Verified</span>
+                  <span className="badge badge-verified">Tasdiqlangan</span>
                 ) : (
-                  <span className="badge badge-warning">Pending verification</span>
+                  <span className="badge badge-warning">Tekshiruvda</span>
                 )}
               </p>
               <Link href={`/housing/${item.id}`} className="btn btn-primary">
-                Housing details
+                Batafsil ko&#39;rish
               </Link>
             </article>
           );

@@ -9,47 +9,49 @@ export default function HousingDetailsPage({ params }: { params: { id: string } 
 
   return (
     <main>
-      <Link href="/catalog">← Back to catalog</Link>
-      <h1>{housing.name}</h1>
-      <p className="muted">
-        {typeLabel(housing.type)} · {housing.address} · {housing.distanceKm} km from {housing.university}
-      </p>
+      <Link href="/catalog" className="back-link">← Katalogga qaytish</Link>
+      <section className="detail-hero">
+        <h1>{housing.name}</h1>
+        <p className="muted">
+          {typeLabel(housing.type)} · {housing.address} · {housing.university}dan {housing.distanceKm} km
+        </p>
+      </section>
 
       <section className="grid grid-2">
         <article className="card">
-          <h2>Gallery</h2>
+          <h2>Galereya</h2>
           <div className="grid grid-2">
             {housing.images.map((image) => (
               <img key={image} src={image} alt={housing.name} className="property-image" />
             ))}
           </div>
-          <p className="muted">Video tour: {housing.videoUrl}</p>
+          <p className="muted">Video ko&#39;rinish: {housing.videoUrl}</p>
         </article>
 
         <article className="card">
-          <h2>Overview</h2>
+          <h2>Umumiy ma&#39;lumot</h2>
           <p>{housing.description}</p>
           <div className="kv">
-            <span>Price</span>
+            <span>Narxi</span>
             <strong>{formatMoney(housing.monthlyPrice)}</strong>
           </div>
           <div className="kv">
-            <span>Available beds</span>
+            <span>Bo&#39;sh o&#39;rinlar</span>
             <strong>
               {housing.availableBeds}/{housing.totalBeds}
             </strong>
           </div>
           <div className="kv">
-            <span>Rating</span>
+            <span>Reyting</span>
             <strong>{housing.rating}</strong>
           </div>
-          {housing.verified ? <span className="badge badge-verified">Verified by University</span> : null}
+          {housing.verified ? <span className="badge badge-verified">Universitet tasdiqlagan</span> : null}
         </article>
       </section>
 
       <section className="section grid grid-2">
         <article className="card">
-          <h2>Amenities</h2>
+          <h2>Qulayliklar</h2>
           <ul className="list">
             {housing.amenities.map((item) => (
               <li key={item}>{item}</li>
@@ -57,7 +59,7 @@ export default function HousingDetailsPage({ params }: { params: { id: string } 
           </ul>
         </article>
         <article className="card">
-          <h2>Rules</h2>
+          <h2>Qoidalar</h2>
           <ul className="list">
             {housing.rules.map((rule) => (
               <li key={rule}>{rule}</li>
@@ -67,26 +69,26 @@ export default function HousingDetailsPage({ params }: { params: { id: string } 
       </section>
 
       <section className="section card">
-        <h2>Room List</h2>
+        <h2>Xonalar ro&#39;yxati</h2>
         <div className="grid grid-2">
           {housing.rooms.map((room) => (
             <article className="card" key={room.roomNumber}>
-              <h3>Room {room.roomNumber}</h3>
+              <h3>Xona {room.roomNumber}</h3>
               <div className="kv">
-                <span>Capacity</span>
+                <span>Sig&#39;imi</span>
                 <strong>{room.capacity}</strong>
               </div>
               <div className="kv">
-                <span>Occupied beds</span>
+                <span>Band o&#39;rinlar</span>
                 <strong>{room.occupiedBeds}</strong>
               </div>
               <div className="kv">
-                <span>Free beds</span>
+                <span>Bo&#39;sh o&#39;rinlar</span>
                 <strong>{room.freeBeds}</strong>
               </div>
               <div className="kv">
-                <span>Gender restriction</span>
-                <strong>{room.genderRestriction ?? "Any"}</strong>
+                <span>Jins bo&#39;yicha cheklov</span>
+                <strong>{room.genderRestriction ?? "Farqi yo&#39;q"}</strong>
               </div>
             </article>
           ))}
@@ -94,20 +96,20 @@ export default function HousingDetailsPage({ params }: { params: { id: string } 
       </section>
 
       <section className="section card">
-        <h2>Student actions</h2>
-        <p className="muted">Use API endpoints for submit application, waiting list, favorites, and issue report.</p>
+        <h2>Talaba amallari</h2>
+        <p className="muted">Ariza yuborish, navbatga turish va murojaat qoldirish funksiyalari shu bo&#39;limdan boshlanadi.</p>
         <div className="cta-row">
           <a href="/api/applications" className="btn btn-primary">
-            Apply
+            Ariza yuborish
           </a>
           <a href="/api/queue" className="btn btn-secondary">
-            Join waiting list
+            Navbatga qo&#39;shilish
           </a>
           <a href="/dashboard/student" className="btn btn-secondary">
-            Add to favorites
+            Sevimlilarga qo&#39;shish
           </a>
           <a href="/api/notifications" className="btn btn-secondary">
-            Report issue
+            Muammo haqida yozish
           </a>
         </div>
       </section>

@@ -1,75 +1,72 @@
-# Smart Student Housing Ecosystem (SSHE)
+# TalabaJoy
 
-Production-ready full-stack web platform for student housing lifecycle management in Uzbekistan.
+Talabalar uchun yotoqxona, xostel va ijaradagi turar joylarni qidirish, taqqoslash, ariza yuborish va boshqarish platformasi.
 
-## Core scope
-
-- Student verification (OneID-ready flow)
-- Housing search and filtering catalog
-- Application and queue management
-- Room allocation lifecycle
-- Residency payments and receipts
-- Notifications (in-app/email/SMS placeholders)
-- Reviews and analytics dashboards
-- Multi-role administration
-
-## Roles
-
-- Student
-- University Administrator
-- Hostel Administrator
-- Private Landlord
-- Super Administrator
-
-## Tech stack
+## Texnologiyalar
 
 - Next.js 14 (App Router + API Routes)
 - TypeScript
-- Prisma ORM (PostgreSQL target)
-- Responsive custom UI (no template boilerplate)
+- Prisma ORM
+- PostgreSQL
 
-## Run locally
+## Loyihani ishga tushirish
 
-1. Install dependencies
+1. Kutubxonalarni o'rnating:
 
 ```bash
 npm install
 ```
 
-2. Configure environment
+2. Muhit faylini yarating:
 
 ```bash
 cp .env.example .env
 ```
 
-3. Start development server
+3. Prisma client generatsiya qiling:
+
+```bash
+npm run db:generate
+```
+
+4. Dev serverni ishga tushiring:
 
 ```bash
 npm run dev
 ```
 
-Open http://localhost:3000
+5. Brauzerda oching:
 
-## Database
+http://localhost:3000
 
-Prisma schema is included for production DB modeling.
-
-Useful commands:
+## Foydali buyruqlar
 
 ```bash
-npm run db:generate
+npm run build
+npm run start
+npm run lint
 npm run db:push
 npm run db:studio
 ```
 
-For quick PostgreSQL startup:
+## PostgreSQL tezkor ishga tushirish
 
 ```bash
 docker compose up -d
 ```
 
-## Important notes
+## Xatolik bo'lsa (MODULE_NOT_FOUND, 500)
 
-- OneID is represented by an integration-ready mock endpoint.
-- Payment providers (Click, Payme, Uzum, Paynet) are scaffolded with a unified API shape.
-- Queue logic includes priority ordering, automatic candidate selection, and temporary reservation semantics.
+Ba'zida Next.js kesh fayllari buzilishi mumkin. Quyidagilarni bajaring:
+
+```bash
+pkill -f "next dev" || true
+rm -rf .next
+npm run dev
+```
+
+## Eslatma
+
+- OneID hozircha integration-ready mock ko'rinishida.
+- To'lov provayderlari (Click, Payme, Uzum, Paynet) uchun API shakli tayyorlangan.
+- Hisob statuslari va verifikatsiya bannerlari dashboardlarda ko'rsatiladi.

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "d9f87b65-6f63-4eca-9ca0-fc5dc6ef2208",
+    "email": "ali.test@example.uz",
+    "passwordHash": "$2b$10$RYEi2Iz.hYRoOKo14fHonOvOZPCSg.LOuHe1wjRU0eVIXCMsWjwXi",
+    "displayName": "Ali Valiyev",
+    "role": "STUDENT",
+    "status": "ACTIVE",
+    "verified": false,
+    "createdAt": "2026-06-14T10:58:42.844Z"
+  },
+  {
+    "id": "b1078edc-afea-4585-bd3b-2038284f284d",
+    "email": "aziza.flow@example.uz",
+    "passwordHash": "$2b$10$O5eyJRigpmnrTvQvdCQK5OShZzkAFETWNChAgXgTKoMG5nDLJNhoi",
+    "displayName": "Aziza Karimova",
+    "role": "STUDENT",
+    "status": "ACTIVE",
+    "verified": false,
+    "createdAt": "2026-06-14T11:00:11.795Z"
+  },
+  {
+    "id": "e519361f-a703-43e1-9730-9e0714411ccc",
+    "email": "profasstor@gmail.com",
+    "passwordHash": "$2b$10$R/V3hT/3ln73sAQve6OEUe7QpDGRdc/t8MctMg.BqejcwKogURtsW",
+    "displayName": "Ayubxon Koriev",
+    "role": "STUDENT",
+    "status": "ACTIVE",
+    "verified": false,
+    "createdAt": "2026-06-14T11:05:21.376Z"
+  }
+]

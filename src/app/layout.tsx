@@ -1,6 +1,19 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
+import { Plus_Jakarta_Sans, Syne } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
+
+const bodyFont = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-body"
+});
+
+const displayFont = Syne({
+  subsets: ["latin"],
+  weight: ["700", "800"],
+  variable: "--font-display"
+});
 
 export const metadata: Metadata = {
   title: "TalabaJoy | Talabalar uchun turar joy platformasi",
@@ -8,9 +21,20 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = cookies().get("talabajoy_session")?.value;
+  const currentUser = session
+    ? (JSON.parse(session) as { displayName: string; role: string; status?: string; verified?: boolean })
+    : null;
+  const profileHref =
+    currentUser?.role === "STUDENT"
+      ? "/dashboard/student?status=ACTIVE&verified=false"
+      : currentUser
+        ? "/dashboard/provider?status=PENDING_VERIFICATION"
+        : "/dashboard";
+
   return (
     <html lang="uz">
-      <body>
+      <body className={`${bodyFont.variable} ${displayFont.variable}`}>
         <div className="container">
           <header className="topbar">
             <div className="brand-wrap">
@@ -30,15 +54,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav className="nav">
               <Link href="/catalog">Katalog</Link>
               <Link href="/dashboard">Kabinetlar</Link>
-              <Link href="/auth/register" className="btn btn-ghost">
-                Ro&#39;yxatdan o&#39;tish
-              </Link>
-              <Link href="/auth/login" className="btn btn-primary">
-                Kirish
-              </Link>
+              {currentUser ? (
+                <>
+                  <span className="user-chip">{currentUser.displayName}</span>
+                  <Link href={profileHref} className="btn btn-ghost">
+                    Profilim
+                  </Link>
+                  <Link href="/api/auth/logout" className="btn btn-primary">
+                    Chiqish
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href="/auth/register" className="btn btn-ghost">
+                    Ro&#39;yxatdan o&#39;tish
+                  </Link>
+                  <Link href="/auth/login" className="btn btn-primary">
+                    Kirish
+                  </Link>
+                </>
+              )}
             </nav>
           </header>
-          {children}
+          <div className="page-frame">{children}</div>
           <footer className="footer footer-rich">
             <div className="footer-grid">
               <article>
