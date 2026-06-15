@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import type { Route } from 'next';
 import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import styles from '@/components/site-header.module.css';
@@ -72,13 +71,13 @@ export function SiteHeader({ userName }: SiteHeaderProps) {
     setIsMobileOpen(false);
   }, [pathname]);
 
-  const navItems: Array<{ href: Route; label: string }> = [
+  const navItems = [
     { href: '/', label: 'Bosh sahifa' },
     { href: '/catalog', label: 'Katalog' },
     { href: '/dashboard', label: 'Boshqaruv paneli' },
   ];
 
-  const profileMenu: Array<{ href: Route; label: string }> = [
+  const profileMenu = [
     { href: '/dashboard', label: 'Profil' },
     { href: '/dashboard/student', label: 'Mening arizalarim' },
     { href: '/dashboard/student', label: 'Mening yashash joyim' },

@@ -1,7 +1,19 @@
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
+import { Plus_Jakarta_Sans, Syne } from 'next/font/google';
 import './globals.css';
 import { SiteShell } from '@/components/site-shell';
+
+const bodyFont = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-body',
+});
+
+const displayFont = Syne({
+  subsets: ['latin'],
+  weight: ['700', '800'],
+  variable: '--font-display',
+});
 
 export const metadata: Metadata = {
   title: 'TalabaJoy',
@@ -59,7 +71,7 @@ export default async function RootLayout({
 
   return (
     <html lang="uz">
-      <body>
+      <body className={`${bodyFont.variable} ${displayFont.variable}`}>
         <SiteShell userName={userName}>{children}</SiteShell>
       </body>
     </html>
