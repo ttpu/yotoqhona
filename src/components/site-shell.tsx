@@ -21,11 +21,18 @@ export function SiteShell({ children, userName }: SiteShellProps) {
       {!isAuthPage && (
         <footer className={styles.footer}>
           <div className={styles.footerInner}>
-            <p>© {new Date().getFullYear()} TalabaJoy. Barcha huquqlar himoyalangan.</p>
+            <div className={styles.footerBrand}>
+              <p className={styles.footerTitle}>TalabaJoy</p>
+              <p className={styles.footerText}>
+                Talabalar uchun yotoqxona va turar joylarni topish, ariza berish va kuzatish platformasi.
+              </p>
+              <p className={styles.footerCopy}>© {new Date().getFullYear()} TalabaJoy. Barcha huquqlar himoyalangan.</p>
+            </div>
             <div className={styles.footerLinks}>
               <Link href="/">Bosh sahifa</Link>
               <Link href="/catalog">Katalog</Link>
-              <Link href="/dashboard">Panel</Link>
+              <Link href="/dashboard">Boshqaruv paneli</Link>
+              <Link href="/dashboard/student">Talaba bo&#39;limi</Link>
             </div>
           </div>
         </footer>

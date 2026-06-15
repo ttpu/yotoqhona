@@ -160,6 +160,42 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      <section className={styles.mapSection}>
+        <div className={styles.sectionHead}>
+          <h2>Toshkent bo‘yicha interaktiv xarita</h2>
+          <p>Hududlar kesimida turar joylarni tez va qulay toping.</p>
+        </div>
+        <div className={styles.mapCard}>
+          <iframe
+            title="TalabaJoy xaritasi"
+            src="https://www.google.com/maps?q=Tashkent&output=embed"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+      </section>
+
+      <section className={styles.partners}>
+        <div className={styles.sectionHead}>
+          <h2>Hamkor universitetlar</h2>
+          <p>TalabaJoy ishonchli hamkor tarmog‘i bilan ishlaydi.</p>
+        </div>
+        <div className={styles.partnerGrid}>
+          <article className={styles.partnerCard}>
+            <img src="/universities/tuit.svg" alt="TUIT" loading="lazy" />
+          </article>
+          <article className={styles.partnerCard}>
+            <img src="/universities/wiut.svg" alt="WIUT" loading="lazy" />
+          </article>
+          <article className={styles.partnerCard}>
+            <img src="/universities/nuu.svg" alt="NUU" loading="lazy" />
+          </article>
+          <article className={styles.partnerCard}>
+            <img src="/universities/samsu.svg" alt="SamSU" loading="lazy" />
+          </article>
+        </div>
+      </section>
     </div>
   );
 }
