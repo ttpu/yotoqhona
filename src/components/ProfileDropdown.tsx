@@ -2,11 +2,10 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import type { Route } from "next";
 
 interface ProfileDropdownProps {
   displayName: string;
-  profileHref: Route;
+  profileHref: string;
 }
 
 export default function ProfileDropdown({ displayName, profileHref }: ProfileDropdownProps) {
@@ -52,7 +51,7 @@ export default function ProfileDropdown({ displayName, profileHref }: ProfileDro
             Менинг яшаш джойим
           </Link>
           <Link href="/dashboard/student" className="profile-menu-item">
-            То&#39;ловлар
+            То'ловлар
           </Link>
           <Link href="/dashboard/student" className="profile-menu-item">
             Билдиришномалар
@@ -60,7 +59,7 @@ export default function ProfileDropdown({ displayName, profileHref }: ProfileDro
           <Link href="/dashboard/student" className="profile-menu-item">
             Созламалар
           </Link>
-          <Link href="/" className="profile-menu-item">
+          <Link href="#" className="profile-menu-item">
             Йордам маркази
           </Link>
           <div className="profile-menu-separator"></div>
