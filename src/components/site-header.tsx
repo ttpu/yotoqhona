@@ -10,10 +10,17 @@ type SiteHeaderProps = {
 };
 
 const notifications = [
-  'Arizangiz bo\'yicha yangi yangilanish mavjud',
+  "Arizangiz bo'yicha yangi yangilanish mavjud",
   'Navbat holati yangilandi',
-  'To\'lov muddati bo\'yicha eslatma',
-  'Yangi bo\'sh o\'rinlar qo\'shildi',
+  "To'lov muddati bo'yicha eslatma",
+  "Yangi bo'sh o'rinlar qo'shildi",
+];
+
+const navItems = [
+  { href: '/', label: 'Bosh sahifa' },
+  { href: '/catalog', label: 'Katalog' },
+  { href: '/dashboard', label: 'Universitetlar' },
+  { href: '/', label: 'Yordam' },
 ];
 
 export function SiteHeader({ userName }: SiteHeaderProps) {
@@ -22,10 +29,8 @@ export function SiteHeader({ userName }: SiteHeaderProps) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  const notifRef = useRef<HTMLDivElement | null>(null);
-  const profileRef = useRef<HTMLDivElement | null>(null);
-
-  const unreadCount = 3;
+  const notifRef = useRef<HTMLDivElement>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
 
   const initials = useMemo(() => {
     if (!userName) return 'TJ';
@@ -33,35 +38,28 @@ export function SiteHeader({ userName }: SiteHeaderProps) {
       .split(' ')
       .filter(Boolean)
       .slice(0, 2)
-      .map((part) => part[0]?.toUpperCase() ?? '')
+      .map((p) => p[0]?.toUpperCase() ?? '')
       .join('');
   }, [userName]);
 
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
         setIsNotifOpen(false);
         setIsProfileOpen(false);
         setIsMobileOpen(false);
       }
     };
-
-    const onPointerDown = (event: MouseEvent) => {
-      const target = event.target as Node;
-      if (notifRef.current && !notifRef.current.contains(target)) {
-        setIsNotifOpen(false);
-      }
-      if (profileRef.current && !profileRef.current.contains(target)) {
-        setIsProfileOpen(false);
-      }
+    const onClick = (e: MouseEvent) => {
+      const t = e.target as Node;
+      if (notifRef.current && !notifRef.current.contains(t)) setIsNotifOpen(false);
+      if (profileRef.current && !profileRef.current.contains(t)) setIsProfileOpen(false);
     };
-
-    window.addEventListener('keydown', onKeyDown);
-    window.addEventListener('mousedown', onPointerDown);
-
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('mousedown', onClick);
     return () => {
-      window.removeEventListener('keydown', onKeyDown);
-      window.removeEventListener('mousedown', onPointerDown);
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('mousedown', onClick);
     };
   }, []);
 
@@ -71,135 +69,125 @@ export function SiteHeader({ userName }: SiteHeaderProps) {
     setIsMobileOpen(false);
   }, [pathname]);
 
-  const navItems = [
-    { href: '/', label: 'Bosh sahifa' },
-    { href: '/catalog', label: 'Katalog' },
-    { href: '/dashboard', label: 'Boshqaruv paneli' },
-  ];
-
-  const profileMenu = [
-    { href: '/dashboard', label: 'Profil' },
-    { href: '/dashboard/student', label: 'Mening arizalarim' },
-    { href: '/dashboard/student', label: 'Mening yashash joyim' },
-    { href: '/dashboard/student', label: 'To\'lovlar' },
-    { href: '/dashboard/student', label: 'Bildirishnomalar' },
-    { href: '/dashboard', label: 'Sozlamalar' },
-    { href: '/', label: 'Yordam markazi' },
-  ];
-
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <div className={styles.left}>
-          <Link href="/" className={styles.brand} aria-label="TalabaJoy bosh sahifaga o'tish">
-            <span className={styles.brandIcon} aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4.5 13.8L14 6L23.5 13.8V22.5C23.5 23.3 22.8 24 22 24H6C5.2 24 4.5 23.3 4.5 22.5V13.8Z" stroke="currentColor" strokeWidth="1.6"/>
-                <path d="M11.2 24V17.2H16.8V24" stroke="currentColor" strokeWidth="1.6"/>
-                <path d="M8.5 9.4L14 6L19.5 9.4" stroke="currentColor" strokeWidth="1.6"/>
-                <path d="M9.2 5.1L14 3L18.8 5.1L14 7.2L9.2 5.1Z" fill="currentColor"/>
-                <path d="M13.25 10.7H14.75V16.2H16.5V17.5H11.5V16.2H13.25V10.7Z" fill="currentColor"/>
+        {/* Logo */}
+        <Link href="/" className={styles.brand}>
+          <div className={styles.brandIcon}>TJ</div>
+          TalabaJoy
+        </Link>
+
+        {/* Search */}
+        <div className={styles.searchWrap}>
+          <div className={styles.searchBox}>
+            <span className={styles.searchIcon}>
+              <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
               </svg>
             </span>
-            <span className={styles.brandText}>TalabaJoy</span>
-          </Link>
-        </div>
-
-        <div className={styles.center}>
-          <div className={styles.searchWrap}>
-            <span className={styles.searchIcon} aria-hidden="true">⌕</span>
             <input
-              type="search"
+              type="text"
               className={styles.searchInput}
-              placeholder="Universitet, tuman yoki turar joy qidiring"
-              aria-label="Qidiruv"
+              placeholder="Shahar, universitet yoki turar joy qidiring..."
             />
           </div>
-          <nav className={styles.desktopNav} aria-label="Asosiy navigatsiya">
-            {navItems.map((item) => {
-              const active =
-                item.href === '/'
-                  ? pathname === '/'
-                  : pathname === item.href || pathname.startsWith(`${item.href}/`);
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`${styles.navLink} ${active ? styles.navLinkActive : ''}`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+          <button className={styles.searchBtn}>Qidirish</button>
         </div>
 
+        {/* Desktop nav */}
+        <nav className={styles.desktopNav} aria-label="Asosiy navigatsiya">
+          {navItems.map((item) => {
+            const active =
+              item.href === '/'
+                ? pathname === '/'
+                : pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`${styles.navLink} ${active ? styles.navLinkActive : ''}`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Right: guest OR logged-in */}
         <div className={styles.right}>
-          <Link href="/dashboard/student" className={styles.quickAccess}>
-            Talabaga tezkor kirish
-          </Link>
-
-          <div className={styles.dropdownWrap} ref={notifRef}>
-            <button
-              type="button"
-              className={styles.iconButton}
-              onClick={() => setIsNotifOpen((value) => !value)}
-              aria-expanded={isNotifOpen}
-              aria-controls="notif-panel"
-              aria-label="Bildirishnomalar"
-            >
-              <span aria-hidden="true">🔔</span>
-              <span className={styles.badge}>{unreadCount}</span>
-            </button>
-            {isNotifOpen && (
-              <div id="notif-panel" className={styles.dropdownPanel} role="dialog" aria-label="Bildirishnomalar paneli">
-                <p className={styles.dropdownTitle}>Bildirishnomalar markazi</p>
-                <ul className={styles.notifList}>
-                  {notifications.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
+          {!userName ? (
+            <>
+              <Link href="/auth/login" className={styles.btnLogin}>Kirish</Link>
+              <Link href="/auth/register" className={styles.btnRegister}>Ro&#39;yxatdan o&#39;tish</Link>
+            </>
+          ) : (
+            <>
+              {/* Bell */}
+              <div className={styles.bellWrap} ref={notifRef}>
+                <button
+                  type="button"
+                  className={styles.bellWrap}
+                  onClick={() => setIsNotifOpen((v) => !v)}
+                  aria-label="Bildirishnomalar"
+                >
+                  <svg className={styles.bellIcon} width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                  </svg>
+                  <span className={styles.bellBadge}>1</span>
+                </button>
+                {isNotifOpen && (
+                  <div className={styles.notifDropdown}>
+                    <p className={styles.notifTitle}>Bildirishnomalar</p>
+                    <ul className={styles.notifList}>
+                      {notifications.map((n) => (
+                        <li key={n}>{n}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
-          <div className={styles.dropdownWrap} ref={profileRef}>
-            <button
-              type="button"
-              className={styles.profileButton}
-              onClick={() => setIsProfileOpen((value) => !value)}
-              aria-expanded={isProfileOpen}
-              aria-controls="profile-panel"
-              aria-label="Profil menyusi"
-            >
-              <span className={styles.avatar}>{initials}</span>
-              <span className={styles.profileName}>{userName ?? 'Foydalanuvchi'}</span>
-              <span className={styles.chevron} aria-hidden="true">▾</span>
-            </button>
-            {isProfileOpen && (
-              <div id="profile-panel" className={styles.dropdownPanel} role="menu" aria-label="Profil menyusi">
-                {profileMenu.map((item) => (
-                  <Link key={`${item.href}-${item.label}`} href={item.href} className={styles.menuItem} role="menuitem">
-                    {item.label}
-                  </Link>
-                ))}
-                <hr className={styles.divider} />
-                <form action="/api/auth/logout" method="POST">
-                  <button type="submit" className={styles.logoutButton}>
-                    Chiqish
-                  </button>
-                </form>
+              {/* Profile */}
+              <div className={styles.userWrap} ref={profileRef}>
+                <button
+                  type="button"
+                  className={styles.userBtn}
+                  onClick={() => setIsProfileOpen((v) => !v)}
+                  aria-label="Profil menyusi"
+                >
+                  <div className={styles.avatar}>{initials}</div>
+                  <span className={styles.username}>
+                    {userName.split(' ')[0]}
+                    {userName.split(' ')[1] ? `\n${userName.split(' ')[1]}` : ''}
+                  </span>
+                  <span className={styles.caret}>▾</span>
+                </button>
+                {isProfileOpen && (
+                  <div className={styles.dropdown}>
+                    <Link href="/dashboard" className={styles.dropItem}>👤 &nbsp;Mening profilim</Link>
+                    <Link href="/dashboard/student" className={styles.dropItem}>🏠 &nbsp;Mening arizalarim</Link>
+                    <Link href="/dashboard/student" className={styles.dropItem}>❤️ &nbsp;Saralangan joylar</Link>
+                    <Link href="/dashboard" className={styles.dropItem}>⚙️ &nbsp;Sozlamalar</Link>
+                    <hr className={styles.dropDivider} />
+                    <form action="/api/auth/logout" method="POST">
+                      <button type="submit" className={`${styles.dropItem} ${styles.dropLogout}`}>
+                        🚪 &nbsp;Chiqish
+                      </button>
+                    </form>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            </>
+          )}
 
+          {/* Hamburger */}
           <button
             type="button"
             className={styles.hamburger}
-            onClick={() => setIsMobileOpen((value) => !value)}
-            aria-expanded={isMobileOpen}
-            aria-controls="mobile-panel"
+            onClick={() => setIsMobileOpen((v) => !v)}
             aria-label="Menyu"
           >
             ☰
@@ -207,24 +195,27 @@ export function SiteHeader({ userName }: SiteHeaderProps) {
         </div>
       </div>
 
-      {isMobileOpen && (
-        <div id="mobile-panel" className={styles.mobilePanel}>
-          <div className={styles.mobileSearch}>
-            <span aria-hidden="true">⌕</span>
-            <input type="search" placeholder="Qidiruv" aria-label="Mobil qidiruv" />
-          </div>
-          <nav className={styles.mobileNav} aria-label="Mobil navigatsiya">
-            {navItems.map((item) => (
-              <Link key={`mobile-${item.href}`} href={item.href} className={styles.mobileNavLink}>
-                {item.label}
-              </Link>
-            ))}
-            <Link href="/dashboard/student" className={styles.mobileNavLink}>
-              Talabaga tezkor kirish
-            </Link>
-          </nav>
+      {/* Mobile panel */}
+      <div className={`${styles.mobilePanel} ${isMobileOpen ? styles.mobilePanelOpen : ''}`}>
+        <div className={styles.mobileSearch}>
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="#999" strokeWidth="2">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+          <input type="text" placeholder="Qidiruv..." />
         </div>
-      )}
+        {navItems.map((item) => (
+          <Link key={`m-${item.label}`} href={item.href} className={styles.mobileNavLink}>
+            {item.label}
+          </Link>
+        ))}
+        {!userName && (
+          <>
+            <Link href="/auth/login" className={styles.mobileNavLink}>Kirish</Link>
+            <Link href="/auth/register" className={styles.mobileNavLink}>Ro&#39;yxatdan o&#39;tish</Link>
+          </>
+        )}
+      </div>
     </header>
   );
 }

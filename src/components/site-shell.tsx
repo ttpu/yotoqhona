@@ -13,23 +13,32 @@ type SiteShellProps = {
 export function SiteShell({ children, userName }: SiteShellProps) {
   const pathname = usePathname();
   const isAuthPage = pathname.startsWith('/auth');
+  const isHome = pathname === '/';
+
+  if (isAuthPage) {
+    return <>{children}</>;
+  }
 
   return (
     <div className={styles.page}>
-      <SiteHeader userName={userName} />
-      <main className={styles.main}>{children}</main>
-      {!isAuthPage && (
-        <footer className={styles.footer}>
-          <div className={styles.footerInner}>
-            <p>© {new Date().getFullYear()} TalabaJoy. Barcha huquqlar himoyalangan.</p>
-            <div className={styles.footerLinks}>
-              <Link href="/">Bosh sahifa</Link>
-              <Link href="/catalog">Katalog</Link>
-              <Link href="/dashboard">Panel</Link>
-            </div>
-          </div>
-        </footer>
-      )}
+      <div className={styles.wrapper}>
+        <div className={styles.topPanel}>
+          <SiteHeader userName={userName} />
+        </div>
+        <div className={styles.contentPanel}>
+          <main className={styles.main}>{children}</main>
+          {!isHome && (
+            <footer className={styles.footer}>
+              <p>© {new Date().getFullYear()} TalabaJoy. Barcha huquqlar himoyalangan.</p>
+              <div className={styles.footerLinks}>
+                <Link href="/">Bosh sahifa</Link>
+                <Link href="/catalog">Katalog</Link>
+                <Link href="/dashboard">Panel</Link>
+              </div>
+            </footer>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
