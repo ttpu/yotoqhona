@@ -85,7 +85,10 @@ export async function POST(request: NextRequest) {
         displayName: `${payload.firstName} ${payload.lastName}`.trim(),
         role: "STUDENT",
         status,
-        verified: false
+        verified: false,
+        university: payload.university,
+        faculty: payload.faculty,
+        course: payload.course
       });
 
       const response = NextResponse.json(
@@ -107,7 +110,10 @@ export async function POST(request: NextRequest) {
           displayName: user.displayName,
           role: user.role,
           status: user.status,
-          verified: user.verified
+          verified: user.verified,
+          university: user.university,
+          faculty: user.faculty,
+          course: user.course
         }),
         {
           httpOnly: true,
@@ -128,7 +134,8 @@ export async function POST(request: NextRequest) {
         displayName: payload.shortName,
         role: "UNIVERSITY_PROVIDER",
         status,
-        verified: true
+        verified: true,
+        organizationName: payload.officialUniversityName
       });
 
       const response = NextResponse.json(
@@ -150,7 +157,8 @@ export async function POST(request: NextRequest) {
           displayName: user.displayName,
           role: user.role,
           status: user.status,
-          verified: user.verified
+          verified: user.verified,
+          organizationName: user.organizationName
         }),
         {
           httpOnly: true,

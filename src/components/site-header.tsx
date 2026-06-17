@@ -3,18 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import type { Route } from 'next';
+import type { SessionUser } from '@/lib/session';
 import styles from '@/components/site-header.module.css';
 
 type SiteHeaderProps = {
-  userName: string | null;
+  user: SessionUser | null;
 };
-
-const notifications = [
-  "Arizangiz bo'yicha yangi yangilanish mavjud",
-  'Navbat holati yangilandi',
-  "To'lov muddati bo'yicha eslatma",
-  "Yangi bo'sh o'rinlar qo'shildi",
-];
 
 const navItems = [
   { href: '/', label: 'Bosh sahifa' },
@@ -23,7 +18,83 @@ const navItems = [
   { href: '/', label: 'Yordam' },
 ];
 
-export function SiteHeader({ userName }: SiteHeaderProps) {
+const roleLabels: Record<SessionUser['role'], string> = {
+  STUDENT: 'Talaba',
+  UNIVERSITY_PROVIDER: 'Universitet boshqarmasi',
+  PRIVATE_PROVIDER: 'Xususiy egasi',
+};
+
+type MenuItem = {
+  href: Route;
+  icon: string;
+  title: string;
+  desc: string;
+};
+
+const studentMenu: MenuItem[] = [
+  { href: '/dashboard/student' as Route, icon: '🏠', title: 'Mening yashash joyim', desc: "Joriy turar joyingiz, xona va yashash holatini ko'rish." },
+  { href: '/dashboard/student' as Route, icon: '📄', title: 'Mening arizalarim', desc: 'Yotoqxona, kvartira yoki xostelga barcha arizalar.' },
+  { href: '/dashboard/student' as Route, icon: '💳', title: "To'lovlar", desc: "To'lovlar tarixi, Payme/Click cheklari, qarzdorliklar." },
+  { href: '/dashboard/student' as Route, icon: '❤️', title: 'Saqlangan joylar', desc: 'Sevimli yotoqxona va kvartiralar.' },
+  { href: '/dashboard/student' as Route, icon: '⚙️', title: 'Sozlamalar', desc: "Telefon, parol, til va sozlamalarni o'zgartirish." },
+  { href: '/' as Route, icon: '❓', title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
+];
+
+const universityMenu: MenuItem[] = [
+  { href: '/dashboard/admin' as Route, icon: '🏢', title: 'Boshqaruv paneli', desc: 'Bino, xona va joylar holatining umumiy ko\'rinishi.' },
+  { href: '/dashboard/admin' as Route, icon: '🛏️', title: 'Yotoqxona va xonalar', desc: "Binolar, xonalar va bo'sh joylarni boshqarish." },
+  { href: '/dashboard/admin' as Route, icon: '📥', title: 'Arizalar va navbat', desc: 'Talabalar arizalarini ko\'rib chiqish va navbatni boshqarish.' },
+  { href: '/dashboard/admin' as Route, icon: '💳', title: "To'lovlar va hisobotlar", desc: 'Tushumlar, qarzdorliklar va moliyaviy hisobotlar.' },
+  { href: '/dashboard/admin' as Route, icon: '⚙️', title: 'Sozlamalar', desc: 'Tashkilot va akkaunt sozlamalari.' },
+  { href: '/' as Route, icon: '❓', title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
+];
+
+const privateMenu: MenuItem[] = [
+  { href: '/dashboard/provider' as Route, icon: '🏠', title: "E'lonlarim", desc: "Joylashtirilgan kvartira, xona va xostel e'lonlari." },
+  { href: '/dashboard/provider' as Route, icon: '📥', title: 'Arizalar', desc: "Ijaraga olish bo'yicha kelib tushgan so'rovlar." },
+  { href: '/dashboard/provider' as Route, icon: '💳', title: "To'lovlar", desc: "Ijaraga oluvchilar to'lovlari va tushumlar." },
+  { href: '/dashboard/provider' as Route, icon: '🛡️', title: 'Tekshiruv holati', desc: 'OneID va davlat tekshiruvi holatini ko\'rish.' },
+  { href: '/dashboard/provider' as Route, icon: '⚙️', title: 'Sozlamalar', desc: 'Telefon, parol va akkaunt sozlamalari.' },
+  { href: '/' as Route, icon: '❓', title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
+];
+
+const notificationsByRole: Record<SessionUser['role'], string[]> = {
+  STUDENT: [
+    "Arizangiz bo'yicha yangi yangilanish mavjud",
+    'Navbat holati yangilandi',
+    "To'lov muddati bo'yicha eslatma",
+  ],
+  UNIVERSITY_PROVIDER: [
+    "Yangi ariza tushdi — ko'rib chiqish kerak",
+    "Bo'sh joylar soni kam qolyapti",
+    'Oylik hisobot tayyor',
+  ],
+  PRIVATE_PROVIDER: [
+    "Yangi ijaraga olish so'rovi keldi",
+    "To'lov qabul qilindi",
+    'OneID tekshiruvi holati yangilandi',
+  ],
+};
+
+function getMenuForRole(role: SessionUser['role']): MenuItem[] {
+  if (role === 'UNIVERSITY_PROVIDER') return universityMenu;
+  if (role === 'PRIVATE_PROVIDER') return privateMenu;
+  return studentMenu;
+}
+
+function getSubtitle(user: SessionUser): string {
+  if (user.role === 'STUDENT') {
+    return [roleLabels.STUDENT, user.university, user.course ? `${user.course}-kurs` : null]
+      .filter(Boolean)
+      .join(' • ');
+  }
+  if (user.role === 'UNIVERSITY_PROVIDER') {
+    return [roleLabels.UNIVERSITY_PROVIDER, user.organizationName].filter(Boolean).join(' • ');
+  }
+  return roleLabels.PRIVATE_PROVIDER;
+}
+
+export function SiteHeader({ user }: SiteHeaderProps) {
   const pathname = usePathname();
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -33,14 +104,17 @@ export function SiteHeader({ userName }: SiteHeaderProps) {
   const profileRef = useRef<HTMLDivElement>(null);
 
   const initials = useMemo(() => {
-    if (!userName) return 'TJ';
-    return userName
+    if (!user?.displayName) return 'TJ';
+    return user.displayName
       .split(' ')
       .filter(Boolean)
       .slice(0, 2)
       .map((p) => p[0]?.toUpperCase() ?? '')
       .join('');
-  }, [userName]);
+  }, [user]);
+
+  const notifications = user ? notificationsByRole[user.role] : [];
+  const menu = user ? getMenuForRole(user.role) : [];
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -117,7 +191,7 @@ export function SiteHeader({ userName }: SiteHeaderProps) {
 
         {/* Right: guest OR logged-in */}
         <div className={styles.right}>
-          {!userName ? (
+          {!user ? (
             <>
               <Link href="/auth/login" className={styles.btnLogin}>Kirish</Link>
               <Link href="/auth/register" className={styles.btnRegister}>Ro&#39;yxatdan o&#39;tish</Link>
@@ -128,7 +202,7 @@ export function SiteHeader({ userName }: SiteHeaderProps) {
               <div className={styles.bellWrap} ref={notifRef}>
                 <button
                   type="button"
-                  className={styles.bellWrap}
+                  className={styles.bellBtn}
                   onClick={() => setIsNotifOpen((v) => !v)}
                   aria-label="Bildirishnomalar"
                 >
@@ -136,7 +210,9 @@ export function SiteHeader({ userName }: SiteHeaderProps) {
                     <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
                     <path d="M13.73 21a2 2 0 0 1-3.46 0" />
                   </svg>
-                  <span className={styles.bellBadge}>1</span>
+                  {notifications.length > 0 && (
+                    <span className={styles.bellBadge}>{notifications.length}</span>
+                  )}
                 </button>
                 {isNotifOpen && (
                   <div className={styles.notifDropdown}>
@@ -160,21 +236,35 @@ export function SiteHeader({ userName }: SiteHeaderProps) {
                 >
                   <div className={styles.avatar}>{initials}</div>
                   <span className={styles.username}>
-                    {userName.split(' ')[0]}
-                    {userName.split(' ')[1] ? `\n${userName.split(' ')[1]}` : ''}
+                    {user.displayName.split(' ')[0]}
                   </span>
                   <span className={styles.caret}>▾</span>
                 </button>
                 {isProfileOpen && (
                   <div className={styles.dropdown}>
-                    <Link href="/dashboard" className={styles.dropItem}>👤 &nbsp;Mening profilim</Link>
-                    <Link href="/dashboard/student" className={styles.dropItem}>🏠 &nbsp;Mening arizalarim</Link>
-                    <Link href="/dashboard/student" className={styles.dropItem}>❤️ &nbsp;Saralangan joylar</Link>
-                    <Link href="/dashboard" className={styles.dropItem}>⚙️ &nbsp;Sozlamalar</Link>
+                    <div className={styles.dropdownHeader}>
+                      <div className={styles.dropdownAvatar}>{initials}</div>
+                      <div>
+                        <p className={styles.dropdownName}>{user.displayName}</p>
+                        <p className={styles.dropdownSubtitle}>{getSubtitle(user)}</p>
+                      </div>
+                    </div>
+                    <div className={styles.dropItems}>
+                      {menu.map((item) => (
+                        <Link key={item.title} href={item.href} className={styles.dropItem}>
+                          <span className={styles.dropItemIcon}>{item.icon}</span>
+                          <span className={styles.dropItemBody}>
+                            <span className={styles.dropItemTitle}>{item.title}</span>
+                            <span className={styles.dropItemDesc}>{item.desc}</span>
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
                     <hr className={styles.dropDivider} />
                     <form action="/api/auth/logout" method="POST">
                       <button type="submit" className={`${styles.dropItem} ${styles.dropLogout}`}>
-                        🚪 &nbsp;Chiqish
+                        <span className={styles.dropItemIcon}>🚪</span>
+                        <span className={styles.dropItemTitle}>Chiqish</span>
                       </button>
                     </form>
                   </div>
@@ -209,7 +299,7 @@ export function SiteHeader({ userName }: SiteHeaderProps) {
             {item.label}
           </Link>
         ))}
-        {!userName && (
+        {!user && (
           <>
             <Link href="/auth/login" className={styles.mobileNavLink}>Kirish</Link>
             <Link href="/auth/register" className={styles.mobileNavLink}>Ro&#39;yxatdan o&#39;tish</Link>

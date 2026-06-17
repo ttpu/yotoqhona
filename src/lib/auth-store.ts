@@ -14,6 +14,10 @@ export type StoredUser = {
   status: StoredAccountStatus;
   verified: boolean;
   createdAt: string;
+  university?: string;
+  faculty?: string;
+  course?: string;
+  organizationName?: string;
 };
 
 const dataDir = path.join(process.cwd(), "data");
@@ -52,6 +56,10 @@ export async function createStoredUser(input: {
   role: StoredUserRole;
   status: StoredAccountStatus;
   verified: boolean;
+  university?: string;
+  faculty?: string;
+  course?: string;
+  organizationName?: string;
 }) {
   const users = await readUsers();
   const existing = users.find((item) => item.email.toLowerCase() === input.email.toLowerCase());
@@ -69,7 +77,11 @@ export async function createStoredUser(input: {
     role: input.role,
     status: input.status,
     verified: input.verified,
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
+    university: input.university,
+    faculty: input.faculty,
+    course: input.course,
+    organizationName: input.organizationName
   };
 
   users.push(user);

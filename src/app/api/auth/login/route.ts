@@ -26,7 +26,11 @@ export async function POST(request: NextRequest) {
         displayName: user.displayName,
         role: user.role,
         status: user.status,
-        verified: user.verified
+        verified: user.verified,
+        university: user.university,
+        faculty: user.faculty,
+        course: user.course,
+        organizationName: user.organizationName
       }),
       {
         httpOnly: true,

@@ -3,14 +3,15 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SiteHeader } from '@/components/site-header';
+import type { SessionUser } from '@/lib/session';
 import styles from '@/components/site-shell.module.css';
 
 type SiteShellProps = {
   children: React.ReactNode;
-  userName: string | null;
+  user: SessionUser | null;
 };
 
-export function SiteShell({ children, userName }: SiteShellProps) {
+export function SiteShell({ children, user }: SiteShellProps) {
   const pathname = usePathname();
   const isAuthPage = pathname.startsWith('/auth');
   const isHome = pathname === '/';
@@ -23,7 +24,7 @@ export function SiteShell({ children, userName }: SiteShellProps) {
     <div className={styles.page}>
       <div className={styles.wrapper}>
         <div className={styles.topPanel}>
-          <SiteHeader userName={userName} />
+          <SiteHeader user={user} />
         </div>
         <div className={styles.contentPanel}>
           <main className={styles.main}>{children}</main>
