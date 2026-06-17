@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Route } from 'next';
 import type { SessionUser } from '@/lib/session';
@@ -96,12 +96,27 @@ function getSubtitle(user: SessionUser): string {
 
 export function SiteHeader({ user }: SiteHeaderProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const notifRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
+
+  async function handleConfirmLogout() {
+    setIsLoggingOut(true);
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } finally {
+      setIsLoggingOut(false);
+      setIsLogoutConfirmOpen(false);
+      router.push('/');
+      router.refresh();
+    }
+  }
 
   const initials = useMemo(() => {
     if (!user?.displayName) return 'TJ';
@@ -122,6 +137,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
         setIsNotifOpen(false);
         setIsProfileOpen(false);
         setIsMobileOpen(false);
+        setIsLogoutConfirmOpen(false);
       }
     };
     const onClick = (e: MouseEvent) => {
@@ -261,12 +277,17 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                       ))}
                     </div>
                     <hr className={styles.dropDivider} />
-                    <form action="/api/auth/logout" method="POST">
-                      <button type="submit" className={`${styles.dropItem} ${styles.dropLogout}`}>
-                        <span className={styles.dropItemIcon}>🚪</span>
-                        <span className={styles.dropItemTitle}>Chiqish</span>
-                      </button>
-                    </form>
+                    <button
+                      type="button"
+                      className={`${styles.dropItem} ${styles.dropLogout}`}
+                      onClick={() => {
+                        setIsProfileOpen(false);
+                        setIsLogoutConfirmOpen(true);
+                      }}
+                    >
+                      <span className={styles.dropItemIcon}>🚪</span>
+                      <span className={styles.dropItemTitle}>Chiqish</span>
+                    </button>
                   </div>
                 )}
               </div>
@@ -306,6 +327,36 @@ export function SiteHeader({ user }: SiteHeaderProps) {
           </>
         )}
       </div>
+
+      {/* Logout confirmation modal */}
+      {isLogoutConfirmOpen && (
+        <div className={styles.modalOverlay} onClick={() => setIsLogoutConfirmOpen(false)}>
+          <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalIcon}>🚪</div>
+            <h3 className={styles.modalTitle}>Profildan chiqmoqchimisiz?</h3>
+            <p className={styles.modalText}>
+              Tizimdan chiqsangiz, qaytadan kirish uchun email va parolingiz kerak bo&#39;ladi.
+            </p>
+            <div className={styles.modalBtns}>
+              <button
+                type="button"
+                className={styles.modalBtnCancel}
+                onClick={() => setIsLogoutConfirmOpen(false)}
+              >
+                Bekor qilish
+              </button>
+              <button
+                type="button"
+                className={styles.modalBtnConfirm}
+                onClick={handleConfirmLogout}
+                disabled={isLoggingOut}
+              >
+                {isLoggingOut ? 'Chiqilmoqda...' : 'Ha, chiqish'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
