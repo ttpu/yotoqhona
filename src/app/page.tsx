@@ -2,38 +2,61 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from '@/app/page.module.css';
 
+// =====================================================================
+// IKONKALAR — rasmlarni public/icons/ papkasiga joylang va
+// iconSrc: '' o'rniga yo'lni yozing, masalan: '/icons/shield.png'
+// =====================================================================
+
 const aboutCards = [
   {
-    icon: '🏠',
+    iconSrc: '/icons/301177_shield-checkmark-icon.png',
     title: 'Tasdiqlangan turar joylar',
     text: "Barcha joylar tekshiruvidan o'tkazilgan va tasdiqlangan.",
   },
   {
-    icon: '🎓',
+    iconSrc: '/icons/301168_people-icon.png',
     title: 'Universitetlar bilan integratsiya',
     text: 'Rasmiy hamkorlik orqali ishonchli xizmat.',
   },
   {
-    icon: '🗺',
+    iconSrc: '/icons/301175_search-icon.png',
     title: 'Qulay qidiruv va xaritalar',
     text: 'Xarita orqali joyashuvni oson toping.',
   },
   {
-    icon: '💳',
+    iconSrc: '/icons/301185_wallet-icon.png',
     title: "Onlayn to'lov va boshqaruv",
     text: "Xavfsiz to'lov qiling va arizalaringizni boshqaring.",
   },
 ];
 
+const missionPillars = [
+  {
+    iconSrc: '', // '/icons/shield.png'
+    title: 'Xavfsizlik',
+    text: 'Faqat tasdiqlangan va ishonchli obyektlar.',
+  },
+  {
+    iconSrc: '', // '/icons/lightning.png'
+    title: 'Tezkorlik',
+    text: 'Bir necha daqiqada ariza yuborish va javob olish.',
+  },
+  {
+    iconSrc: '', // '/icons/handshake.png'
+    title: 'Ishonchlilik',
+    text: 'Universitetlar va rasmiy hamkorlar bilan ishlaymiz.',
+  },
+];
+
 const whyCards = [
-  { icon: '🛡️', color: 'green',  title: 'Tasdiqlangan turar joylar', text: 'Barcha obyektlar tekshirilgan va tasdiqlangan.' },
-  { icon: '🎓', color: 'blue',   title: 'Universitet integratsiyasi', text: "Rasmiy universitetlar bilan to'g'ridan-to'g'ri integratsiya." },
-  { icon: '📊', color: 'orange', title: 'Real vaqt statistikasi', text: "Joy soni, bandlik va navbat haqida real vaqt ma'lumot." },
-  { icon: '📋', color: 'purple', title: 'Onlayn arizalar', text: "Ariza yuborish jarayoni to'liq onlayn va juda oson." },
-  { icon: '💳', color: 'green',  title: "Payme va Click to'lovlari", text: "Xavfsiz onlayn to'lov tizimi orqali to'lov qiling." },
-  { icon: '🏢', color: 'blue',   title: 'Yagona boshqaruv tizimi', text: 'Talabalar va turar joy egalari uchun qulay boshqaruv.' },
-  { icon: '🗺️', color: 'orange', title: 'Xarita orqali qidiruv', text: 'Joyashuvni xarita orqali oson toping.' },
-  { icon: '✅', color: 'purple', title: 'Xavfsiz va shaffof xizmat', text: "Ma'lumotlaringiz himoyalangan, xizmatlarimiz shaffof." },
+  { iconSrc: '', color: 'green',  title: 'Tasdiqlangan turar joylar',  text: 'Barcha obyektlar tekshirilgan va tasdiqlangan.' },        // '/icons/verified.png'
+  { iconSrc: '', color: 'blue',   title: 'Universitet integratsiyasi', text: "Rasmiy universitetlar bilan to'g'ridan-to'g'ri integratsiya." }, // '/icons/graduation.png'
+  { iconSrc: '', color: 'orange', title: 'Real vaqt statistikasi',     text: "Joy soni, bandlik va navbat haqida real vaqt ma'lumot." }, // '/icons/stats.png'
+  { iconSrc: '', color: 'purple', title: 'Onlayn arizalar',            text: "Ariza yuborish jarayoni to'liq onlayn va juda oson." },    // '/icons/application.png'
+  { iconSrc: '', color: 'green',  title: "Payme va Click to'lovlari",  text: "Xavfsiz onlayn to'lov tizimi orqali to'lov qiling." },    // '/icons/payment.png'
+  { iconSrc: '', color: 'blue',   title: 'Yagona boshqaruv tizimi',   text: 'Talabalar va turar joy egalari uchun qulay boshqaruv.' }, // '/icons/dashboard.png'
+  { iconSrc: '', color: 'orange', title: 'Xarita orqali qidiruv',     text: 'Joyashuvni xarita orqali oson toping.' },                 // '/icons/map.png'
+  { iconSrc: '', color: 'purple', title: 'Xavfsiz va shaffof xizmat', text: "Ma'lumotlaringiz himoyalangan, xizmatlarimiz shaffof." }, // '/icons/security.png'
 ];
 
 export default function HomePage() {
@@ -56,7 +79,7 @@ export default function HomePage() {
         <div className={styles.heroContent}>
           <div className={styles.heroBadge}>Talabalar uchun</div>
           <h1 className={styles.heroTitle}>
-            Talabalar uchun ishonchli turar joy topishning eng qulay yo'li
+            Talabalar uchun ishonchli turar joy topishning eng qulay yo`li
           </h1>
           <p className={styles.heroDesc}>
             Yotoqxona, hostel va ijaradagi turar joylarni qidiring, taqqoslang, ariza yuboring va
@@ -78,7 +101,7 @@ export default function HomePage() {
               <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#4caf82" strokeWidth="2.5">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
-              Xavfsiz to'lov
+              Xavfsiz to`lov
             </span>
             <span className={styles.trustItem}>
               <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#4caf82" strokeWidth="2.5">
@@ -100,15 +123,20 @@ export default function HomePage() {
           <p className={styles.aboutSubtitle}>Talabalar uchun yagona raqamli turar joy ekotizimi</p>
           <p className={styles.aboutText}>
             TalabaJoy — bu talabalarni yotoqxona, hostel va ijaradagi turar joylar bilan
-            bog'lovchi ishonchli va qulay platforma. Bizning maqsadimiz — har bir talaba uchun
+            bog`lovchi ishonchli va qulay platforma. Bizning maqsadimiz — har bir talaba uchun
             xavfsiz, qulay va arzon turar joy topishini osonlashtirish.
           </p>
-          <Link href="/catalog" className={styles.btnSecondary}>Batafsil ma'lumot →</Link>
+          <Link href="/catalog" className={styles.btnSecondary}>Batafsil ma`lumot →</Link>
         </div>
         <div className={styles.aboutGrid}>
           {aboutCards.map((card) => (
             <article className={styles.featureCard} key={card.title}>
-              <div className={styles.featureIcon}>{card.icon}</div>
+              <div className={styles.featureIcon}>
+                {card.iconSrc
+                  ? <Image src={card.iconSrc} alt={card.title} width={44} height={44} />
+                  : <div className={styles.iconSlot} />
+                }
+              </div>
               <h4>{card.title}</h4>
               <p>{card.text}</p>
             </article>
@@ -123,27 +151,20 @@ export default function HomePage() {
         <p className={styles.missionEyebrow}>Bizning maqsadimiz</p>
         <h2>Har bir talaba uchun xavfsiz va qulay turar joy topishni osonlashtirish.</h2>
         <div className={styles.pillars}>
-          <div className={styles.pillar}>
-            <div className={styles.pillarIcon}>🛡️</div>
-            <div>
-              <h4>Xavfsizlik</h4>
-              <p>Faqat tasdiqlangan va ishonchli obyektlar.</p>
+          {missionPillars.map((pillar) => (
+            <div className={styles.pillar} key={pillar.title}>
+              <div className={styles.pillarIcon}>
+                {pillar.iconSrc
+                  ? <Image src={pillar.iconSrc} alt={pillar.title} width={36} height={36} />
+                  : <div className={styles.iconSlot} />
+                }
+              </div>
+              <div>
+                <h4>{pillar.title}</h4>
+                <p>{pillar.text}</p>
+              </div>
             </div>
-          </div>
-          <div className={styles.pillar}>
-            <div className={styles.pillarIcon}>⚡</div>
-            <div>
-              <h4>Tezkorlik</h4>
-              <p>Bir necha daqiqada ariza yuborish va javob olish.</p>
-            </div>
-          </div>
-          <div className={styles.pillar}>
-            <div className={styles.pillarIcon}>🤝</div>
-            <div>
-              <h4>Ishonchlilik</h4>
-              <p>Universitetlar va rasmiy hamkorlar bilan ishlaymiz.</p>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -156,7 +177,10 @@ export default function HomePage() {
           {whyCards.map((card) => (
             <div className={styles.whyCard} key={card.title}>
               <div className={`${styles.whyIcon} ${styles[card.color as keyof typeof styles]}`}>
-                {card.icon}
+                {card.iconSrc
+                  ? <Image src={card.iconSrc} alt={card.title} width={24} height={24} />
+                  : <div className={styles.iconSlot} />
+                }
               </div>
               <h4>{card.title}</h4>
               <p>{card.text}</p>
@@ -203,28 +227,28 @@ export default function HomePage() {
         <div className={styles.statsBannerTitle}>TalabaJoy<br />raqamlarda</div>
         <div className={styles.statsGrid}>
           <div className={styles.statItem}>
-            <div className={styles.statIconBox}>🎓</div>
+            <div className={styles.statIconBox}> </div>
             <div>
               <div className={styles.statNum}>20+</div>
               <div className={styles.statLabel}>Hamkor universitetlar</div>
             </div>
           </div>
           <div className={styles.statItem}>
-            <div className={styles.statIconBox}>👥</div>
+            <div className={styles.statIconBox}> </div>
             <div>
               <div className={styles.statNum}>5000+</div>
               <div className={styles.statLabel}>Talabalar</div>
             </div>
           </div>
           <div className={styles.statItem}>
-            <div className={styles.statIconBox}>🏠</div>
+            <div className={styles.statIconBox}> </div>
             <div>
               <div className={styles.statNum}>2000+</div>
               <div className={styles.statLabel}>Mavjud joylar</div>
             </div>
           </div>
           <div className={styles.statItem}>
-            <div className={styles.statIconBox}>✅</div>
+            <div className={styles.statIconBox}> </div>
             <div>
               <div className={styles.statNum}>500+</div>
               <div className={styles.statLabel}>Tasdiqlangan obyektlar</div>
@@ -282,7 +306,7 @@ export default function HomePage() {
             <h4>Aloqa</h4>
             <div className={styles.contactItem}><span>📞</span> +998 90 123 45 67</div>
             <div className={styles.contactItem}><span>✉️</span> info@talabajoy.uz</div>
-            <div className={styles.contactItem}><span>📍</span> Toshkent, O'zbekiston</div>
+            <div className={styles.contactItem}><span>📍</span> Toshkent, O`zbekiston</div>
           </div>
         </div>
         <div className={styles.footerBottom}>
