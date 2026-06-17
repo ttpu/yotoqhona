@@ -1,5 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { cookies } from 'next/headers';
+import { parseSessionCookie } from '@/lib/session';
+import { getFavoriteIds, listListings } from '@/lib/listings-store';
+import ListingCard from '@/components/listing-card';
 import styles from '@/app/page.module.css';
 
 // =====================================================================
@@ -59,7 +63,19 @@ const whyCards = [
   { iconSrc: '', color: 'purple', title: 'Xavfsiz va shaffof xizmat', text: "Ma'lumotlaringiz himoyalangan, xizmatlarimiz shaffof." }, // '/icons/security.png'
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const sessionUser = parseSessionCookie(cookies().get('talabajoy_session')?.value);
+  const { items: demoListings } = await listListings({
+    filters: { status: 'ACTIVE' },
+    sort: 'newest',
+    pageSize: 4
+  });
+  const favoriteIds = sessionUser ? await getFavoriteIds(sessionUser.id) : [];
+  const featuredListings = demoListings.map((item) => ({
+    ...item,
+    isFavorited: favoriteIds.includes(item.id)
+  }));
+
   return (
     <>
       {/* HERO */}
@@ -145,6 +161,28 @@ export default function HomePage() {
       </section>
 
       <hr className={styles.divider} />
+
+      {/* FEATURED LISTINGS */}
+      {featuredListings.length > 0 && (
+        <>
+          <section className={styles.featured}>
+            <div className={styles.featuredHead}>
+              <div>
+                <p className={styles.featuredEyebrow}>Mashhur e&#39;lonlar</p>
+                <h2>Talabalar orasida sevimli turar joylar</h2>
+              </div>
+              <Link href="/catalog" className={styles.btnSecondary}>Barchasini ko&#39;rish →</Link>
+            </div>
+            <div className={styles.featuredGrid}>
+              {featuredListings.map((listing) => (
+                <ListingCard key={listing.id} listing={listing} loggedIn={Boolean(sessionUser)} />
+              ))}
+            </div>
+          </section>
+
+          <hr className={styles.divider} />
+        </>
+      )}
 
       {/* MISSION */}
       <section className={styles.mission}>

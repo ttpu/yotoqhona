@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": "16b39ce6-03c2-4e99-b188-3db44c20ada6",
+    "listingId": "e7eaaa66-2bd0-4e54-a3c0-9c4d6a767f21",
+    "userId": "59e938e4-1fea-4465-8424-7e3f3e0b3c4b",
+    "userName": "Demo Talaba",
+    "score": 5,
+    "comment": "Juda yaxshi joy, uy egasi ham mas'uliyatli. Tavsiya qilaman!",
+    "createdAt": "2026-06-17T09:27:38.952Z"
+  },
+  {
+    "id": "e3d206a1-abbe-41ff-b6e8-7e6df433cb00",
+    "listingId": "8de3c9da-4422-4633-af47-52d629516fa2",
+    "userId": "59e938e4-1fea-4465-8424-7e3f3e0b3c4b",
+    "userName": "Demo Talaba",
+    "score": 4,
+    "comment": "Narxi hamyonbop, lekin internet ba'zida sekinlashadi.",
+    "createdAt": "2026-06-17T09:27:38.954Z"
+  },
+  {
+    "id": "bf175419-16dd-4a0d-83bb-342d825df3ca",
+    "listingId": "b5900c56-9377-408b-a1f2-2212d0c37a17",
+    "userId": "59e938e4-1fea-4465-8424-7e3f3e0b3c4b",
+    "userName": "Demo Talaba",
+    "score": 5,
+    "comment": "Juda tinch va qulay, transport yaqin.",
+    "createdAt": "2026-06-17T09:27:38.955Z"
+  }
+]
