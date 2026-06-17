@@ -15,7 +15,8 @@
 .topPanel {
   background: #fff;
   border-radius: 20px;
-  overflow: hidden;
+  position: relative;
+  z-index: 50;
 }
 
 .contentPanel {
