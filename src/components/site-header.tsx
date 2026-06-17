@@ -12,10 +12,8 @@ type SiteHeaderProps = {
 };
 
 const navItems = [
-  { href: '/', label: 'Bosh sahifa' },
   { href: '/catalog', label: 'Katalog' },
   { href: '/dashboard', label: 'Universitetlar' },
-  { href: '/', label: 'Yordam' },
 ];
 
 const roleLabels: Record<SessionUser['role'], string> = {

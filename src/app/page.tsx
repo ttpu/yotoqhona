@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import type { Route } from 'next';
 import { cookies } from 'next/headers';
 import { parseSessionCookie } from '@/lib/session';
 import { getFavoriteIds, listListings } from '@/lib/listings-store';
@@ -76,6 +77,10 @@ export default async function HomePage() {
     isFavorited: favoriteIds.includes(item.id)
   }));
 
+  const isProvider =
+    sessionUser?.role === 'UNIVERSITY_PROVIDER' || sessionUser?.role === 'PRIVATE_PROVIDER';
+  const listingCta = (isProvider ? '/dashboard/listings/new' : '/auth/register') as Route;
+
   return (
     <>
       {/* HERO */}
@@ -103,7 +108,7 @@ export default async function HomePage() {
           </p>
           <div className={styles.heroBtns}>
             <Link href="/catalog" className={styles.btnPrimary}>Turar joy qidirish</Link>
-            <Link href="/auth/register" className={styles.btnOutline}>Turar joy joylashtirish</Link>
+            <Link href={listingCta} className={styles.btnOutline}>Turar joy joylashtirish</Link>
           </div>
           <div className={styles.heroTrust}>
             <span className={styles.trustItem}>
@@ -303,7 +308,7 @@ export default async function HomePage() {
         </div>
         <div className={styles.ctaBtns}>
           <Link href="/catalog" className={styles.btnCtaPrimary}>Turar joy qidirish</Link>
-          <Link href="/auth/register" className={styles.btnCtaOutline}>Turar joy joylashtirish</Link>
+          <Link href={listingCta} className={styles.btnCtaOutline}>Turar joy joylashtirish</Link>
         </div>
       </section>
 

@@ -210,8 +210,46 @@
     "contactTelegram": "@talabajoy_demo6",
     "requirements": [],
     "status": "ACTIVE",
-    "viewCount": 0,
+    "viewCount": 2,
     "createdAt": "2026-06-17T09:27:38.951Z",
     "updatedAt": "2026-06-17T09:27:38.951Z"
+  },
+  {
+    "id": "8b7cc2f6-b409-4561-b19f-51ea160aee90",
+    "ownerId": "e10a1024-6bb2-4b64-9a55-96fe4f4eb1d7",
+    "ownerRole": "PRIVATE_PROVIDER",
+    "ownerName": "Demo Uy Egasi",
+    "title": "Kvartira Demo",
+    "description": "Malumot yetarlikchayozilmoqda",
+    "type": "APARTMENT",
+    "address": "Xondamir 40",
+    "city": "Toshkent",
+    "lat": 41.35037822010649,
+    "lng": 69.22069754139139,
+    "price": 3000000,
+    "currency": "UZS",
+    "roomsCount": 2,
+    "capacity": 1,
+    "amenities": [
+      "WIFI",
+      "AC",
+      "FRIDGE",
+      "WASHER",
+      "KITCHEN",
+      "PARKING",
+      "HOT_WATER"
+    ],
+    "images": [
+      "/uploads/listings/8b7cc2f6-b409-4561-b19f-51ea160aee90/ac5410b2-f37e-4038-b7a3-6347b1ec276c.png"
+    ],
+    "contactPhone": "+998935241616",
+    "requirements": [
+      "NO_PETS",
+      "BOYS_ONLY"
+    ],
+    "status": "ACTIVE",
+    "viewCount": 1,
+    "createdAt": "2026-06-17T09:53:20.443Z",
+    "updatedAt": "2026-06-17T09:53:20.443Z"
   }
 ]
