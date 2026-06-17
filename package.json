@@ -28,14 +28,17 @@
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "jsonwebtoken": "^9.0.3",
+    "leaflet": "^1.9.4",
     "lucide-react": "^1.18.0",
     "next": "^14.2.35",
     "prisma": "^5.22.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.21",
     "@types/node": "^25.9.3",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",

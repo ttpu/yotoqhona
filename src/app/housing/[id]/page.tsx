@@ -1,118 +1,228 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getHousingById } from "@/lib/data";
-import { formatMoney, typeLabel } from "@/lib/format";
+import { cookies } from 'next/headers';
+import Link from 'next/link';
+import type { Route } from 'next';
+import { notFound } from 'next/navigation';
+import { parseSessionCookie } from '@/lib/session';
+import {
+  getListingWithStats,
+  getReviewsForListing,
+  isFavorited
+} from '@/lib/listings-store';
+import {
+  AMENITY_LABELS,
+  LISTING_TYPE_LABELS,
+  REQUIREMENT_LABELS,
+  formatListingPrice
+} from '@/lib/listing-labels';
+import type { ListingStatus } from '@/lib/listing-types';
+import Gallery from './gallery';
+import ViewTracker from './view-tracker';
+import DetailFavoriteButton from './detail-favorite-button';
+import AddReviewForm from './add-review-form';
+import MapView from '@/components/map-view-loader';
+import styles from './housing-detail.module.css';
 
-export default function HousingDetailsPage({ params }: { params: { id: string } }) {
-  const housing = getHousingById(params.id);
-  if (!housing) return notFound();
+const STATUS_CLASS: Record<ListingStatus, string> = {
+  ACTIVE: 'statusActive',
+  BOOKED: 'statusBooked',
+  UNAVAILABLE: 'statusUnavailable'
+};
+
+const STATUS_TEXT: Record<ListingStatus, string> = {
+  ACTIVE: 'Faol',
+  BOOKED: 'Band qilingan',
+  UNAVAILABLE: 'Mavjud emas'
+};
+
+function Stars({ value }: { value: number }) {
+  const rounded = Math.round(value);
+  return <span>{'★'.repeat(rounded)}{'☆'.repeat(5 - rounded)}</span>;
+}
+
+export default async function HousingDetailPage({ params }: { params: { id: string } }) {
+  const listing = await getListingWithStats(params.id);
+  if (!listing) return notFound();
+
+  const sessionUser = parseSessionCookie(cookies().get('talabajoy_session')?.value);
+  const [reviews, favorited] = await Promise.all([
+    getReviewsForListing(params.id),
+    sessionUser ? isFavorited(sessionUser.id, params.id) : Promise.resolve(false)
+  ]);
+
+  const canManage =
+    Boolean(sessionUser) &&
+    (sessionUser!.role === 'UNIVERSITY_PROVIDER' || sessionUser!.id === listing.ownerId);
+
+  const telegramHandle = listing.contactTelegram?.replace(/^@/, '');
 
   return (
-    <main>
-      <Link href="/catalog" className="back-link">← Katalogga qaytish</Link>
-      <section className="detail-hero">
-        <h1>{housing.name}</h1>
-        <p className="muted">
-          {typeLabel(housing.type)} · {housing.address} · {housing.university}dan {housing.distanceKm} km
-        </p>
-      </section>
+    <div className={styles.wrap}>
+      <ViewTracker listingId={listing.id} />
 
-      <section className="grid grid-2">
-        <article className="card">
-          <h2>Galereya</h2>
-          <div className="grid grid-2">
-            {housing.images.map((image) => (
-              <img key={image} src={image} alt={housing.name} className="property-image" />
-            ))}
-          </div>
-          <p className="muted">Video ko&#39;rinish: {housing.videoUrl}</p>
-        </article>
+      <Link href={'/catalog' as Route} className={styles.backLink}>
+        ← Katalogga qaytish
+      </Link>
 
-        <article className="card">
-          <h2>Umumiy ma&#39;lumot</h2>
-          <p>{housing.description}</p>
-          <div className="kv">
-            <span>Narxi</span>
-            <strong>{formatMoney(housing.monthlyPrice)}</strong>
+      <div className={styles.headRow}>
+        <div className={styles.titleBlock}>
+          <h1>{listing.title}</h1>
+          <div className={styles.metaLine}>
+            <span className={`${styles.statusBadge} ${styles[STATUS_CLASS[listing.status]]}`}>
+              {STATUS_TEXT[listing.status]}
+            </span>
+            <span>{LISTING_TYPE_LABELS[listing.type]}</span>
+            <span>·</span>
+            <span>{listing.address}, {listing.city}</span>
           </div>
-          <div className="kv">
-            <span>Bo&#39;sh o&#39;rinlar</span>
-            <strong>
-              {housing.availableBeds}/{housing.totalBeds}
-            </strong>
-          </div>
-          <div className="kv">
-            <span>Reyting</span>
-            <strong>{housing.rating}</strong>
-          </div>
-          {housing.verified ? <span className="badge badge-verified">Universitet tasdiqlagan</span> : null}
-        </article>
-      </section>
-
-      <section className="section grid grid-2">
-        <article className="card">
-          <h2>Qulayliklar</h2>
-          <ul className="list">
-            {housing.amenities.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </article>
-        <article className="card">
-          <h2>Qoidalar</h2>
-          <ul className="list">
-            {housing.rules.map((rule) => (
-              <li key={rule}>{rule}</li>
-            ))}
-          </ul>
-        </article>
-      </section>
-
-      <section className="section card">
-        <h2>Xonalar ro&#39;yxati</h2>
-        <div className="grid grid-2">
-          {housing.rooms.map((room) => (
-            <article className="card" key={room.roomNumber}>
-              <h3>Xona {room.roomNumber}</h3>
-              <div className="kv">
-                <span>Sig&#39;imi</span>
-                <strong>{room.capacity}</strong>
-              </div>
-              <div className="kv">
-                <span>Band o&#39;rinlar</span>
-                <strong>{room.occupiedBeds}</strong>
-              </div>
-              <div className="kv">
-                <span>Bo&#39;sh o&#39;rinlar</span>
-                <strong>{room.freeBeds}</strong>
-              </div>
-              <div className="kv">
-                <span>Jins bo&#39;yicha cheklov</span>
-                <strong>{room.genderRestriction ?? "Farqi yo&#39;q"}</strong>
-              </div>
-            </article>
-          ))}
         </div>
-      </section>
+        {canManage && (
+          <div className={styles.headActions}>
+            <Link href={`/dashboard/listings/${listing.id}/edit` as Route} className={styles.btnEdit}>
+              ✎ Tahrirlash
+            </Link>
+          </div>
+        )}
+      </div>
 
-      <section className="section card">
-        <h2>Talaba amallari</h2>
-        <p className="muted">Ariza yuborish, navbatga turish va murojaat qoldirish funksiyalari shu bo&#39;limdan boshlanadi.</p>
-        <div className="cta-row">
-          <a href="/api/applications" className="btn btn-primary">
-            Ariza yuborish
-          </a>
-          <a href="/api/queue" className="btn btn-secondary">
-            Navbatga qo&#39;shilish
-          </a>
-          <a href="/dashboard/student" className="btn btn-secondary">
-            Sevimlilarga qo&#39;shish
-          </a>
-          <a href="/api/notifications" className="btn btn-secondary">
-            Muammo haqida yozish
-          </a>
+      <Gallery images={listing.images} title={listing.title} />
+
+      <div className={styles.layout}>
+        <div>
+          <div className={styles.section}>
+            <p className={styles.sectionTitle}>Tafsilot</p>
+            <p className={styles.description}>{listing.description}</p>
+
+            <div className={styles.factsGrid}>
+              <div className={styles.factItem}>
+                <div className={styles.factValue}>{listing.roomsCount}</div>
+                <div className={styles.factLabel}>Xonalar soni</div>
+              </div>
+              <div className={styles.factItem}>
+                <div className={styles.factValue}>{listing.capacity}</div>
+                <div className={styles.factLabel}>Yashash o&#39;rinlari</div>
+              </div>
+              <div className={styles.factItem}>
+                <div className={styles.factValue}>{listing.viewCount}</div>
+                <div className={styles.factLabel}>Ko&#39;rishlar soni</div>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.section}>
+            <p className={styles.sectionTitle}>Qulayliklar</p>
+            <div className={styles.chipRow}>
+              {listing.amenities.map((a) => (
+                <span key={a} className={styles.chip}>
+                  {AMENITY_LABELS[a].icon} {AMENITY_LABELS[a].label}
+                </span>
+              ))}
+              {listing.customAmenity && <span className={styles.chip}>✓ {listing.customAmenity}</span>}
+              {listing.amenities.length === 0 && !listing.customAmenity && (
+                <span className={styles.emptyReviews}>Qulayliklar ko&#39;rsatilmagan</span>
+              )}
+            </div>
+          </div>
+
+          {(listing.requirements.length > 0 || listing.customRequirement) && (
+            <div className={styles.section}>
+              <p className={styles.sectionTitle}>Talablar</p>
+              <div className={styles.chipRow}>
+                {listing.requirements.map((r) => (
+                  <span key={r} className={`${styles.chip} ${styles.chipNeutral}`}>
+                    {REQUIREMENT_LABELS[r]}
+                  </span>
+                ))}
+                {listing.customRequirement && (
+                  <span className={`${styles.chip} ${styles.chipNeutral}`}>{listing.customRequirement}</span>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className={styles.section}>
+            <p className={styles.sectionTitle}>Joylashuv</p>
+            <MapView lat={listing.lat} lng={listing.lng} label={listing.title} />
+          </div>
+
+          <div className={styles.section}>
+            <p className={styles.sectionTitle}>Sharhlar va baholar</p>
+            <div className={styles.ratingSummary}>
+              <span className={styles.ratingValue}>{listing.rating || '—'}</span>
+              <div>
+                <div className={styles.ratingStars}>
+                  <Stars value={listing.rating} />
+                </div>
+                <div className={styles.ratingCount}>{listing.reviewCount} ta sharh</div>
+              </div>
+            </div>
+
+            {reviews.length === 0 ? (
+              <p className={styles.emptyReviews}>Hozircha sharhlar yo&#39;q. Birinchi bo&#39;lib fikr bildiring!</p>
+            ) : (
+              <div style={{ marginBottom: 18 }}>
+                {reviews.map((review) => (
+                  <div key={review.id} className={styles.reviewItem}>
+                    <div className={styles.reviewHead}>
+                      <span className={styles.reviewName}>{review.userName}</span>
+                      <span className={styles.reviewDate}>
+                        {new Date(review.createdAt).toLocaleDateString('uz-UZ')}
+                      </span>
+                    </div>
+                    <div className={styles.reviewStars}>
+                      <Stars value={review.score} />
+                    </div>
+                    <p className={styles.reviewComment}>{review.comment}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <AddReviewForm listingId={listing.id} loggedIn={Boolean(sessionUser)} />
+          </div>
         </div>
-      </section>
-    </main>
+
+        <div className={styles.sidebar}>
+          <div className={styles.priceCard}>
+            <p className={styles.priceValue}>
+              {formatListingPrice(listing.price, listing.currency)} <span className={styles.priceUnit}>/ oy</span>
+            </p>
+            <div className={styles.statRow}>
+              <span>⭐ {listing.rating || '—'}</span>
+              <span>👁 {listing.viewCount} ko&#39;rishlar</span>
+            </div>
+
+            <div className={styles.contactList}>
+              <a href={`tel:${listing.contactPhone}`} className={styles.contactBtn}>
+                📞 {listing.contactPhone}
+              </a>
+              {telegramHandle && (
+                <a
+                  href={`https://t.me/${telegramHandle}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`${styles.contactBtn} ${styles.contactBtnOutline}`}
+                >
+                  ✈️ Telegram
+                </a>
+              )}
+              {listing.contactEmail && (
+                <a href={`mailto:${listing.contactEmail}`} className={`${styles.contactBtn} ${styles.contactBtnOutline}`}>
+                  ✉️ Email
+                </a>
+              )}
+            </div>
+
+            <div className={styles.favoriteRow}>
+              <DetailFavoriteButton listingId={listing.id} initialFavorited={favorited} loggedIn={Boolean(sessionUser)} />
+            </div>
+          </div>
+
+          <div className={styles.ownerCard}>
+            <strong>{listing.ownerName}</strong>
+            E&#39;lon egasi · {listing.ownerRole === 'UNIVERSITY_PROVIDER' ? 'Universitet' : 'Xususiy egasi'}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

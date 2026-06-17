@@ -35,14 +35,15 @@ const studentMenu: MenuItem[] = [
   { href: '/dashboard/student' as Route, icon: '🏠', title: 'Mening yashash joyim', desc: "Joriy turar joyingiz, xona va yashash holatini ko'rish." },
   { href: '/dashboard/student' as Route, icon: '📄', title: 'Mening arizalarim', desc: 'Yotoqxona, kvartira yoki xostelga barcha arizalar.' },
   { href: '/dashboard/student' as Route, icon: '💳', title: "To'lovlar", desc: "To'lovlar tarixi, Payme/Click cheklari, qarzdorliklar." },
-  { href: '/dashboard/student' as Route, icon: '❤️', title: 'Saqlangan joylar', desc: 'Sevimli yotoqxona va kvartiralar.' },
+  { href: '/favorites' as Route, icon: '❤️', title: 'Saqlangan joylar', desc: 'Sevimli yotoqxona va kvartiralar.' },
   { href: '/dashboard/student' as Route, icon: '⚙️', title: 'Sozlamalar', desc: "Telefon, parol, til va sozlamalarni o'zgartirish." },
   { href: '/' as Route, icon: '❓', title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
 ];
 
 const universityMenu: MenuItem[] = [
+  { href: '/dashboard/listings/new' as Route, icon: '➕', title: "Yangi e'lon qo'shish", desc: "Yangi turar joy e'lonini platformaga joylashtirish." },
   { href: '/dashboard/admin' as Route, icon: '🏢', title: 'Boshqaruv paneli', desc: 'Bino, xona va joylar holatining umumiy ko\'rinishi.' },
-  { href: '/dashboard/admin' as Route, icon: '🛏️', title: 'Yotoqxona va xonalar', desc: "Binolar, xonalar va bo'sh joylarni boshqarish." },
+  { href: '/dashboard/listings' as Route, icon: '🛏️', title: "E'lonlarni boshqarish", desc: "Barcha e'lonlarni ko'rish va moderatsiya qilish." },
   { href: '/dashboard/admin' as Route, icon: '📥', title: 'Arizalar va navbat', desc: 'Talabalar arizalarini ko\'rib chiqish va navbatni boshqarish.' },
   { href: '/dashboard/admin' as Route, icon: '💳', title: "To'lovlar va hisobotlar", desc: 'Tushumlar, qarzdorliklar va moliyaviy hisobotlar.' },
   { href: '/dashboard/admin' as Route, icon: '⚙️', title: 'Sozlamalar', desc: 'Tashkilot va akkaunt sozlamalari.' },
@@ -50,7 +51,8 @@ const universityMenu: MenuItem[] = [
 ];
 
 const privateMenu: MenuItem[] = [
-  { href: '/dashboard/provider' as Route, icon: '🏠', title: "E'lonlarim", desc: "Joylashtirilgan kvartira, xona va xostel e'lonlari." },
+  { href: '/dashboard/listings/new' as Route, icon: '➕', title: "Yangi e'lon qo'shish", desc: "Yangi turar joy e'lonini platformaga joylashtirish." },
+  { href: '/dashboard/listings' as Route, icon: '🏠', title: "E'lonlarim", desc: "Joylashtirilgan kvartira, xona va xostel e'lonlari." },
   { href: '/dashboard/provider' as Route, icon: '📥', title: 'Arizalar', desc: "Ijaraga olish bo'yicha kelib tushgan so'rovlar." },
   { href: '/dashboard/provider' as Route, icon: '💳', title: "To'lovlar", desc: "Ijaraga oluvchilar to'lovlari va tushumlar." },
   { href: '/dashboard/provider' as Route, icon: '🛡️', title: 'Tekshiruv holati', desc: 'OneID va davlat tekshiruvi holatini ko\'rish.' },
