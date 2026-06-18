@@ -51,7 +51,7 @@ export default function ProfileDropdown({ displayName, profileHref }: ProfileDro
             Менинг яшаш джойим
           </Link>
           <Link href="/dashboard/student" className="profile-menu-item">
-            То'ловлар
+            То&#39;ловлар
           </Link>
           <Link href="/dashboard/student" className="profile-menu-item">
             Билдиришномалар

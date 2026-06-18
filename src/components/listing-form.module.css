@@ -1,0 +1,286 @@
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 24px 60px;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #888;
+}
+
+.section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+  border: 1px solid #f0f0f0;
+}
+
+.sectionTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a2e;
+  padding-bottom: 12px;
+  border-bottom: 1.5px solid #f0f0f0;
+  margin-bottom: 18px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 14px;
+  color: #1a1a2e;
+  background: #fafafa;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  outline: none;
+  font-family: inherit;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: #1a3c34;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(26, 60, 52, 0.08);
+}
+
+.priceRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+}
+
+.checkGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.checkItem:hover {
+  border-color: #1a3c34;
+}
+
+.checkItemActive {
+  border-color: #1a3c34;
+  background: #f0f7f4;
+}
+
+.checkItem input {
+  accent-color: #1a3c34;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Photo upload */
+.dropzone {
+  border: 2px dashed #d7d7d7;
+  border-radius: 14px;
+  padding: 28px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: #fafafa;
+}
+
+.dropzone:hover {
+  border-color: #1a3c34;
+  background: #f0f7f4;
+}
+
+.dropzoneIcon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.dropzoneText {
+  font-size: 13px;
+  color: #666;
+  font-weight: 600;
+}
+
+.dropzoneHint {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.previewGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.previewItem {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: #f0f0f0;
+}
+
+.previewItem img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.previewRemove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.previewBadge {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  background: rgba(26, 60, 52, 0.85);
+  color: #fff;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+/* Buttons */
+.btnPrimary {
+  background: #f5c518;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 26px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: #e6b800;
+}
+
+.btnPrimary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btnRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.btnOutline {
+  background: transparent;
+  color: #1a3c34;
+  border: 1.5px solid #d0d0d0;
+  border-radius: 10px;
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.btnOutline:hover {
+  border-color: #1a3c34;
+  background: #f0f7f4;
+}
+
+.error {
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 13px;
+  color: #c0392b;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 640px) {
+  .grid2,
+  .checkGrid,
+  .priceRow {
+    grid-template-columns: 1fr;
+  }
+
+  .previewGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
