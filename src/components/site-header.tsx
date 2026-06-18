@@ -46,7 +46,7 @@ type MenuItem = {
 };
 
 const studentMenu: MenuItem[] = [
-  { href: '/dashboard/student' as Route, icon: Home, title: 'Mening yashash joyim', desc: "Joriy turar joyingiz, xona va yashash holatini ko'rish." },
+  { href: '/dashboard/dormitory/book' as Route, icon: Home, title: 'Mening yashash joyim', desc: "Yotoqxonadagi xona va yashash holatingizni ko'rish." },
   { href: '/dashboard/student' as Route, icon: FileText, title: 'Mening arizalarim', desc: 'Yotoqxona, kvartira yoki xostelga barcha arizalar.' },
   { href: '/dashboard/student' as Route, icon: CreditCard, title: "To'lovlar", desc: "To'lovlar tarixi, Payme/Click cheklari, qarzdorliklar." },
   { href: '/favorites' as Route, icon: Heart, title: 'Saqlangan joylar', desc: 'Sevimli yotoqxona va kvartiralar.' },
@@ -56,9 +56,9 @@ const studentMenu: MenuItem[] = [
 
 const universityMenu: MenuItem[] = [
   { href: '/dashboard/listings/new' as Route, icon: Plus, title: "Yangi e'lon qo'shish", desc: "Yangi turar joy e'lonini platformaga joylashtirish." },
-  { href: '/dashboard/admin' as Route, icon: Building2, title: 'Boshqaruv paneli', desc: 'Bino, xona va joylar holatining umumiy ko\'rinishi.' },
+  { href: '/dashboard/dormitory' as Route, icon: Building2, title: 'Yotoqxona boshqaruvi', desc: "Qavat, xona va o'rinlar holatining umumiy ko'rinishi." },
   { href: '/dashboard/listings' as Route, icon: Home, title: "E'lonlarni boshqarish", desc: "Barcha e'lonlarni ko'rish va moderatsiya qilish." },
-  { href: '/dashboard/admin' as Route, icon: Inbox, title: 'Arizalar va navbat', desc: 'Talabalar arizalarini ko\'rib chiqish va navbatni boshqarish.' },
+  { href: '/dashboard/dormitory/students' as Route, icon: Inbox, title: 'Talabalar va so\'rovlar', desc: "Talabalar ro'yxati, bron so'rovlari va joylashish holati." },
   { href: '/dashboard/admin' as Route, icon: CreditCard, title: "To'lovlar va hisobotlar", desc: 'Tushumlar, qarzdorliklar va moliyaviy hisobotlar.' },
   { href: '/dashboard/admin' as Route, icon: Settings, title: 'Sozlamalar', desc: 'Tashkilot va akkaunt sozlamalari.' },
   { href: '/' as Route, icon: HelpCircle, title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },

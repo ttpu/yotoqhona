@@ -40,7 +40,8 @@ async function main() {
     verified: true,
     university: "Toshkent Davlat Texnika Universiteti",
     faculty: "Kompyuter muhandisligi",
-    course: "2"
+    course: "2",
+    gender: "MALE"
   });
 
   const university = await ensureUser({

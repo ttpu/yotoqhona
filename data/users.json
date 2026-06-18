@@ -60,7 +60,8 @@
     "createdAt": "2026-06-17T09:27:38.758Z",
     "university": "Toshkent Davlat Texnika Universiteti",
     "faculty": "Kompyuter muhandisligi",
-    "course": "2"
+    "course": "2",
+    "gender": "MALE"
   },
   {
     "id": "626efe64-79a5-4a72-bb17-f977793376ab",

@@ -88,7 +88,8 @@ export async function POST(request: NextRequest) {
         verified: false,
         university: payload.university,
         faculty: payload.faculty,
-        course: payload.course
+        course: payload.course,
+        gender: payload.gender
       });
 
       const response = NextResponse.json(
@@ -113,7 +114,8 @@ export async function POST(request: NextRequest) {
           verified: user.verified,
           university: user.university,
           faculty: user.faculty,
-          course: user.course
+          course: user.course,
+          gender: user.gender
         }),
         {
           httpOnly: true,

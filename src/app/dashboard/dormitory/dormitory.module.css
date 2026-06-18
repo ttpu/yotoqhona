@@ -1,0 +1,235 @@
+.wrap {
+  padding: 32px 24px 60px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  color: #666;
+  margin-bottom: 14px;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  color: #1a3c34;
+}
+
+.headerCard {
+  background: #1a3c34;
+  color: #fff;
+  border-radius: 18px;
+  padding: 26px 28px;
+  margin-bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.headerCard h1 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.headerAddress {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  color: #c8ddd5;
+  margin-bottom: 14px;
+}
+
+.amenityRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.amenityChip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 6px 13px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.headerLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f5c518;
+  color: #1a1a1a;
+  border-radius: 10px;
+  padding: 11px 18px;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Stats */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.statCard {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.statIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statIcon.green { background: #e8f5e9; color: #2e7d32; }
+.statIcon.blue { background: #eff6ff; color: #1d4ed8; }
+.statIcon.yellow { background: #fffbeb; color: #92400e; }
+.statIcon.gray { background: #f5f5f5; color: #555; }
+.statIcon.purple { background: #f3e8ff; color: #7e22ce; }
+
+.statValue {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a1a2e;
+  line-height: 1.2;
+}
+
+.statLabel {
+  font-size: 11.5px;
+  color: #888;
+}
+
+/* Section heading */
+.sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.sectionHead h2 {
+  font-size: 17px;
+  font-weight: 800;
+  color: #1a1a2e;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a3c34;
+  text-decoration: none;
+}
+
+/* Floor cards */
+.floorGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.floorCard {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.floorCard:hover {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.floorCardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.floorNum {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a1a2e;
+}
+
+.genderBadge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.genderBadge.MALE { background: #eff6ff; color: #1d4ed8; }
+.genderBadge.FEMALE { background: #fdf2f8; color: #be185d; }
+
+.occupancyBarTrack {
+  height: 8px;
+  border-radius: 999px;
+  background: #f0f0f0;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.occupancyBarFill {
+  height: 100%;
+  background: #1a3c34;
+  border-radius: 999px;
+}
+
+.floorMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: #666;
+}
+
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+}
+
+.emptyIcon {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1080px) {
+  .statsGrid { grid-template-columns: repeat(3, 1fr); }
+  .floorGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+  .floorGrid { grid-template-columns: 1fr; }
+}

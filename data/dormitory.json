@@ -1,0 +1,529 @@
+{
+  "buildings": [
+    {
+      "id": "49180d5d-885d-434b-85a8-d9c8feae33c8",
+      "universityId": "626efe64-79a5-4a72-bb17-f977793376ab",
+      "universityName": "Toshkent Davlat Texnika Universiteti",
+      "name": "Turin Politexnika Universiteti talabalar turar joyi",
+      "address": "Toshkent shahri, Kichik Halqa Yo'li ko'chasi, 17-uy",
+      "totalFloors": 4,
+      "totalRooms": 41,
+      "amenities": [
+        "Sport maydonchasi",
+        "Coworking zona",
+        "Bepul Wi-Fi"
+      ]
+    }
+  ],
+  "floors": [
+    {
+      "id": "335936ff-0459-4080-a3e9-df067bfd9ff8",
+      "buildingId": "49180d5d-885d-434b-85a8-d9c8feae33c8",
+      "floorNumber": 1,
+      "genderPolicy": "MALE",
+      "facilities": {
+        "diningHalls": 1,
+        "fridges": 3,
+        "microwaves": 3,
+        "showerStalls": 4,
+        "toiletStalls": 4,
+        "washingMachines": 2
+      }
+    },
+    {
+      "id": "b4fb048a-c442-4ade-a529-34a3dd085964",
+      "buildingId": "49180d5d-885d-434b-85a8-d9c8feae33c8",
+      "floorNumber": 2,
+      "genderPolicy": "FEMALE",
+      "facilities": {
+        "diningHalls": 1,
+        "fridges": 3,
+        "microwaves": 3,
+        "showerStalls": 4,
+        "toiletStalls": 4,
+        "washingMachines": 2
+      }
+    },
+    {
+      "id": "3e6b51da-5c05-46d6-9f5d-6c966fc0d10c",
+      "buildingId": "49180d5d-885d-434b-85a8-d9c8feae33c8",
+      "floorNumber": 3,
+      "genderPolicy": "MALE",
+      "facilities": {
+        "diningHalls": 1,
+        "fridges": 3,
+        "microwaves": 3,
+        "showerStalls": 4,
+        "toiletStalls": 4,
+        "washingMachines": 2
+      }
+    },
+    {
+      "id": "05b0de85-59a2-41f0-b452-d590f12d90bb",
+      "buildingId": "49180d5d-885d-434b-85a8-d9c8feae33c8",
+      "floorNumber": 4,
+      "genderPolicy": "MALE",
+      "facilities": {
+        "diningHalls": 1,
+        "fridges": 3,
+        "microwaves": 3,
+        "showerStalls": 4,
+        "toiletStalls": 4,
+        "washingMachines": 2
+      }
+    }
+  ],
+  "rooms": [
+    {
+      "id": "29276758-b26c-47a5-ac27-c7468c9c800f",
+      "floorId": "335936ff-0459-4080-a3e9-df067bfd9ff8",
+      "floorNumber": 1,
+      "roomNumber": "101",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "bccd67e1-87c6-41e6-92c2-6d8c2106b6e8",
+      "floorId": "335936ff-0459-4080-a3e9-df067bfd9ff8",
+      "floorNumber": 1,
+      "roomNumber": "102",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "ebfd36f2-f84f-4749-82b6-dd0a6c3b3c75",
+      "floorId": "335936ff-0459-4080-a3e9-df067bfd9ff8",
+      "floorNumber": 1,
+      "roomNumber": "103",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "1e0dd9ef-8e7a-4e88-aa98-f0a130295642",
+      "floorId": "335936ff-0459-4080-a3e9-df067bfd9ff8",
+      "floorNumber": 1,
+      "roomNumber": "104",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "569ce657-133c-4005-8f38-a675d1c72320",
+      "floorId": "335936ff-0459-4080-a3e9-df067bfd9ff8",
+      "floorNumber": 1,
+      "roomNumber": "105",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "8dcea0f5-3dbb-4a1e-860c-f6956a194517",
+      "floorId": "335936ff-0459-4080-a3e9-df067bfd9ff8",
+      "floorNumber": 1,
+      "roomNumber": "106",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "7f967621-5de8-4e9b-b1d4-d91f06a97665",
+      "floorId": "335936ff-0459-4080-a3e9-df067bfd9ff8",
+      "floorNumber": 1,
+      "roomNumber": "107",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "07111d7e-6b0e-41f1-9aa6-0ca8d3249b4d",
+      "floorId": "335936ff-0459-4080-a3e9-df067bfd9ff8",
+      "floorNumber": 1,
+      "roomNumber": "108",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "37e0a303-c2ae-48d2-9176-df8b68999aa6",
+      "floorId": "b4fb048a-c442-4ade-a529-34a3dd085964",
+      "floorNumber": 2,
+      "roomNumber": "201",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "FEMALE"
+    },
+    {
+      "id": "da487aab-cbbb-41c0-96a8-ad2e8750ee6a",
+      "floorId": "b4fb048a-c442-4ade-a529-34a3dd085964",
+      "floorNumber": 2,
+      "roomNumber": "202",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "FEMALE"
+    },
+    {
+      "id": "e507b0e0-3797-4ea3-9b35-dafddf45481a",
+      "floorId": "b4fb048a-c442-4ade-a529-34a3dd085964",
+      "floorNumber": 2,
+      "roomNumber": "203",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "FEMALE"
+    },
+    {
+      "id": "393d989a-2182-44af-bedb-e4b8c13d9812",
+      "floorId": "b4fb048a-c442-4ade-a529-34a3dd085964",
+      "floorNumber": 2,
+      "roomNumber": "204",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "FEMALE"
+    },
+    {
+      "id": "f8def763-c93c-41db-8b38-ecb3a77bb53c",
+      "floorId": "b4fb048a-c442-4ade-a529-34a3dd085964",
+      "floorNumber": 2,
+      "roomNumber": "205",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "FEMALE"
+    },
+    {
+      "id": "a24b3f6a-f386-4264-beb4-3a711484a100",
+      "floorId": "b4fb048a-c442-4ade-a529-34a3dd085964",
+      "floorNumber": 2,
+      "roomNumber": "206",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "FEMALE"
+    },
+    {
+      "id": "bd2223e3-a5ec-43d3-8926-b5c0cff452b1",
+      "floorId": "b4fb048a-c442-4ade-a529-34a3dd085964",
+      "floorNumber": 2,
+      "roomNumber": "207",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "FEMALE"
+    },
+    {
+      "id": "bf314006-b498-49ee-a229-cfab82dd5bb7",
+      "floorId": "b4fb048a-c442-4ade-a529-34a3dd085964",
+      "floorNumber": 2,
+      "roomNumber": "208",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "FEMALE"
+    },
+    {
+      "id": "12caa306-6d8c-429c-b7e1-425a668f0d5a",
+      "floorId": "b4fb048a-c442-4ade-a529-34a3dd085964",
+      "floorNumber": 2,
+      "roomNumber": "209",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "FEMALE"
+    },
+    {
+      "id": "778aa04f-e6e0-4543-b7fc-a035e9197191",
+      "floorId": "b4fb048a-c442-4ade-a529-34a3dd085964",
+      "floorNumber": 2,
+      "roomNumber": "210",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "FEMALE"
+    },
+    {
+      "id": "f61874c0-3c92-41c0-9c0d-196cc7d5e46b",
+      "floorId": "b4fb048a-c442-4ade-a529-34a3dd085964",
+      "floorNumber": 2,
+      "roomNumber": "211",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "FEMALE"
+    },
+    {
+      "id": "15e0131a-c690-4c96-afe0-da34cab7aa40",
+      "floorId": "3e6b51da-5c05-46d6-9f5d-6c966fc0d10c",
+      "floorNumber": 3,
+      "roomNumber": "301",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "b62cfc1f-b8bb-4921-960f-2c96abac4362",
+      "floorId": "3e6b51da-5c05-46d6-9f5d-6c966fc0d10c",
+      "floorNumber": 3,
+      "roomNumber": "302",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "3adc31f8-9518-4f20-895c-1fbc2c84e58e",
+      "floorId": "3e6b51da-5c05-46d6-9f5d-6c966fc0d10c",
+      "floorNumber": 3,
+      "roomNumber": "303",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "0b8bf562-adf9-4823-b74b-8834c841e203",
+      "floorId": "3e6b51da-5c05-46d6-9f5d-6c966fc0d10c",
+      "floorNumber": 3,
+      "roomNumber": "304",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "fb8dcdae-ac08-41af-86d0-08b6f3359a93",
+      "floorId": "3e6b51da-5c05-46d6-9f5d-6c966fc0d10c",
+      "floorNumber": 3,
+      "roomNumber": "305",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "6ea28748-0c7c-4b53-b732-bb00cd5a8434",
+      "floorId": "3e6b51da-5c05-46d6-9f5d-6c966fc0d10c",
+      "floorNumber": 3,
+      "roomNumber": "306",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "8b670e63-af84-4eb6-bc15-dce717df0587",
+      "floorId": "3e6b51da-5c05-46d6-9f5d-6c966fc0d10c",
+      "floorNumber": 3,
+      "roomNumber": "307",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "a50fc3f8-5c6d-4ac5-83f4-02f4b8602478",
+      "floorId": "3e6b51da-5c05-46d6-9f5d-6c966fc0d10c",
+      "floorNumber": 3,
+      "roomNumber": "308",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "06885d3b-d18a-4019-b06b-07b5a6c9621e",
+      "floorId": "3e6b51da-5c05-46d6-9f5d-6c966fc0d10c",
+      "floorNumber": 3,
+      "roomNumber": "309",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "9f71b90a-cd84-4de5-ada6-bc644cdbf89c",
+      "floorId": "3e6b51da-5c05-46d6-9f5d-6c966fc0d10c",
+      "floorNumber": 3,
+      "roomNumber": "310",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "d1196fe9-8bfe-47ec-a94c-4de032668216",
+      "floorId": "3e6b51da-5c05-46d6-9f5d-6c966fc0d10c",
+      "floorNumber": 3,
+      "roomNumber": "311",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "288fb874-91a7-42ce-a63c-37e174912873",
+      "floorId": "05b0de85-59a2-41f0-b452-d590f12d90bb",
+      "floorNumber": 4,
+      "roomNumber": "401",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "0a5752d7-8bc7-43c0-8742-b5783ca273a6",
+      "floorId": "05b0de85-59a2-41f0-b452-d590f12d90bb",
+      "floorNumber": 4,
+      "roomNumber": "402",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "f3c71d5c-78c5-42a1-a7a0-f02dc606ec23",
+      "floorId": "05b0de85-59a2-41f0-b452-d590f12d90bb",
+      "floorNumber": 4,
+      "roomNumber": "403",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "398b3eed-d4e3-4ef2-9f67-e810e05bcbc4",
+      "floorId": "05b0de85-59a2-41f0-b452-d590f12d90bb",
+      "floorNumber": 4,
+      "roomNumber": "404",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "0dfbcff1-1dd6-4aa4-8d13-ebbd7589fc20",
+      "floorId": "05b0de85-59a2-41f0-b452-d590f12d90bb",
+      "floorNumber": 4,
+      "roomNumber": "405",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "51b1c105-29c5-4635-9fbc-6c6b95d0bebb",
+      "floorId": "05b0de85-59a2-41f0-b452-d590f12d90bb",
+      "floorNumber": 4,
+      "roomNumber": "406",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "3b0114c8-d70c-4931-82a6-21d7389ca7b3",
+      "floorId": "05b0de85-59a2-41f0-b452-d590f12d90bb",
+      "floorNumber": 4,
+      "roomNumber": "407",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "709d9f87-dba7-4363-9d18-70948b313849",
+      "floorId": "05b0de85-59a2-41f0-b452-d590f12d90bb",
+      "floorNumber": 4,
+      "roomNumber": "408",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "621bdd41-3fe6-4dfb-99ee-3df5676e0572",
+      "floorId": "05b0de85-59a2-41f0-b452-d590f12d90bb",
+      "floorNumber": 4,
+      "roomNumber": "409",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "385879c0-431d-45df-9407-9c4288ba3e34",
+      "floorId": "05b0de85-59a2-41f0-b452-d590f12d90bb",
+      "floorNumber": 4,
+      "roomNumber": "410",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    },
+    {
+      "id": "890e28c3-28c2-4064-8147-0c5067acdb65",
+      "floorId": "05b0de85-59a2-41f0-b452-d590f12d90bb",
+      "floorNumber": 4,
+      "roomNumber": "411",
+      "capacity": 4,
+      "bedsCount": 4,
+      "nightstandsCount": 4,
+      "wardrobesCount": 4,
+      "genderPolicy": "MALE"
+    }
+  ]
+}

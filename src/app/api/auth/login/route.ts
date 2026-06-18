@@ -30,7 +30,8 @@ export async function POST(request: NextRequest) {
         university: user.university,
         faculty: user.faculty,
         course: user.course,
-        organizationName: user.organizationName
+        organizationName: user.organizationName,
+        gender: user.gender
       }),
       {
         httpOnly: true,

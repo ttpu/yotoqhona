@@ -11,6 +11,7 @@ export type SessionUser = {
   faculty?: string;
   course?: string;
   organizationName?: string;
+  gender?: "MALE" | "FEMALE";
 };
 
 export function parseSessionCookie(value: string | undefined): SessionUser | null {
@@ -38,6 +39,7 @@ export function parseSessionCookie(value: string | undefined): SessionUser | nul
       faculty: typeof parsed.faculty === "string" ? parsed.faculty : undefined,
       course: typeof parsed.course === "string" ? parsed.course : undefined,
       organizationName: typeof parsed.organizationName === "string" ? parsed.organizationName : undefined,
+      gender: parsed.gender === "MALE" || parsed.gender === "FEMALE" ? parsed.gender : undefined,
     };
   } catch {
     return null;

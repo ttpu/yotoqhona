@@ -18,6 +18,7 @@ export type StoredUser = {
   faculty?: string;
   course?: string;
   organizationName?: string;
+  gender?: "MALE" | "FEMALE";
 };
 
 const dataDir = path.join(process.cwd(), "data");
@@ -60,6 +61,7 @@ export async function createStoredUser(input: {
   faculty?: string;
   course?: string;
   organizationName?: string;
+  gender?: "MALE" | "FEMALE";
 }) {
   const users = await readUsers();
   const existing = users.find((item) => item.email.toLowerCase() === input.email.toLowerCase());
@@ -81,12 +83,22 @@ export async function createStoredUser(input: {
     university: input.university,
     faculty: input.faculty,
     course: input.course,
-    organizationName: input.organizationName
+    organizationName: input.organizationName,
+    gender: input.gender
   };
 
   users.push(user);
   await writeUsers(users);
   return user;
+}
+
+export async function setUserGender(userId: string, gender: "MALE" | "FEMALE") {
+  const users = await readUsers();
+  const idx = users.findIndex((u) => u.id === userId);
+  if (idx === -1) return null;
+  users[idx] = { ...users[idx], gender };
+  await writeUsers(users);
+  return users[idx];
 }
 
 export async function verifyCredentials(email: string, password: string) {
