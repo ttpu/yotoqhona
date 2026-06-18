@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Route } from 'next';
 import { cookies } from 'next/headers';
+import { Camera, Mail, MapPin, Phone, Play, Send } from 'lucide-react';
 import { parseSessionCookie } from '@/lib/session';
 import { getFavoriteIds, listListings } from '@/lib/listings-store';
 import ListingCard from '@/components/listing-card';
@@ -325,10 +326,10 @@ export default async function HomePage() {
               va boshqaring.
             </p>
             <div className={styles.footerSocial}>
-              <a href="#" className={styles.socialIcon}>📱</a>
-              <a href="#" className={styles.socialIcon}>f</a>
-              <a href="#" className={styles.socialIcon}>📷</a>
-              <a href="#" className={styles.socialIcon}>▶</a>
+              <a href="#" className={styles.socialIcon} aria-label="Telegram"><Send size={15} /></a>
+              <a href="#" className={styles.socialIcon} aria-label="Facebook">f</a>
+              <a href="#" className={styles.socialIcon} aria-label="Instagram"><Camera size={15} /></a>
+              <a href="#" className={styles.socialIcon} aria-label="YouTube"><Play size={15} /></a>
             </div>
           </div>
           <div className={styles.footerCol}>
@@ -347,9 +348,9 @@ export default async function HomePage() {
           </div>
           <div className={styles.footerCol}>
             <h4>Aloqa</h4>
-            <div className={styles.contactItem}><span>📞</span> +998 90 123 45 67</div>
-            <div className={styles.contactItem}><span>✉️</span> info@talabajoy.uz</div>
-            <div className={styles.contactItem}><span>📍</span> Toshkent, O`zbekiston</div>
+            <div className={styles.contactItem}><Phone size={15} /> +998 90 123 45 67</div>
+            <div className={styles.contactItem}><Mail size={15} /> info@talabajoy.uz</div>
+            <div className={styles.contactItem}><MapPin size={15} /> Toshkent, O`zbekiston</div>
           </div>
         </div>
         <div className={styles.footerBottom}>

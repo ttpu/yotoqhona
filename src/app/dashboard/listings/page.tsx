@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import type { Route } from 'next';
 import { redirect } from 'next/navigation';
+import { Home } from 'lucide-react';
 import { parseSessionCookie } from '@/lib/session';
 import { listListings } from '@/lib/listings-store';
 import ManageCard from './manage-card';
@@ -38,7 +39,7 @@ export default async function MyListingsPage() {
 
       {items.length === 0 ? (
         <div className={styles.empty}>
-          <div className={styles.emptyIcon}>🏠</div>
+          <div className={styles.emptyIcon}><Home size={36} /></div>
           <p>Hozircha e&#39;lonlar yo&#39;q. Birinchi e&#39;loningizni qo&#39;shing!</p>
         </div>
       ) : (

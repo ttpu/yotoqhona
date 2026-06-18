@@ -88,6 +88,12 @@
   margin-top: 2px;
 }
 
+.metaRow span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .price {
   font-size: 15px;
   font-weight: 800;

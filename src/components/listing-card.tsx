@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Route } from 'next';
+import { Bed, Eye, Star } from 'lucide-react';
 import { LISTING_TYPE_LABELS, formatListingPrice } from '@/lib/listing-labels';
 import type { ListingStatus, ListingWithStats } from '@/lib/listing-types';
 import FavoriteButton from '@/components/favorite-button';
@@ -46,9 +47,9 @@ export default function ListingCard({ listing, loggedIn }: ListingCardProps) {
           {LISTING_TYPE_LABELS[listing.type]} · {listing.address}
         </p>
         <div className={styles.statsRow}>
-          <span>⭐ {listing.rating || '—'}</span>
-          <span>👁 {listing.viewCount}</span>
-          <span>🛏 {listing.roomsCount} xona</span>
+          <span><Star size={13} fill="#f5c518" color="#f5c518" /> {listing.rating || '—'}</span>
+          <span><Eye size={13} /> {listing.viewCount}</span>
+          <span><Bed size={13} /> {listing.roomsCount} xona</span>
         </div>
         <div className={styles.cardFooter}>
           <p className={styles.cardPrice}>

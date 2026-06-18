@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Heart } from 'lucide-react';
 import styles from './housing-detail.module.css';
 
 export default function DetailFavoriteButton({
@@ -35,7 +36,8 @@ export default function DetailFavoriteButton({
 
   return (
     <button type="button" className={styles.btnFavorite} onClick={onClick} disabled={busy}>
-      {favorited ? '❤️ Sevimlilarda' : "🤍 Sevimlilarga qo'shish"}
+      <Heart size={15} fill={favorited ? '#e74c3c' : 'none'} color={favorited ? '#e74c3c' : 'currentColor'} />
+      {favorited ? 'Sevimlilarda' : "Sevimlilarga qo'shish"}
     </button>
   );
 }

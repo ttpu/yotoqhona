@@ -299,6 +299,12 @@
   margin-top: 2px;
 }
 
+.statsRow span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .cardFooter {
   display: flex;
   align-items: center;

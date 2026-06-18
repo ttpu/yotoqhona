@@ -4,6 +4,22 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Route } from 'next';
+import {
+  Building2,
+  ChevronDown,
+  CreditCard,
+  FileText,
+  Heart,
+  HelpCircle,
+  Home,
+  Inbox,
+  LogOut,
+  type LucideIcon,
+  Menu,
+  Plus,
+  Settings,
+  ShieldCheck,
+} from 'lucide-react';
 import type { SessionUser } from '@/lib/session';
 import styles from '@/components/site-header.module.css';
 
@@ -24,38 +40,38 @@ const roleLabels: Record<SessionUser['role'], string> = {
 
 type MenuItem = {
   href: Route;
-  icon: string;
+  icon: LucideIcon;
   title: string;
   desc: string;
 };
 
 const studentMenu: MenuItem[] = [
-  { href: '/dashboard/student' as Route, icon: '🏠', title: 'Mening yashash joyim', desc: "Joriy turar joyingiz, xona va yashash holatini ko'rish." },
-  { href: '/dashboard/student' as Route, icon: '📄', title: 'Mening arizalarim', desc: 'Yotoqxona, kvartira yoki xostelga barcha arizalar.' },
-  { href: '/dashboard/student' as Route, icon: '💳', title: "To'lovlar", desc: "To'lovlar tarixi, Payme/Click cheklari, qarzdorliklar." },
-  { href: '/favorites' as Route, icon: '❤️', title: 'Saqlangan joylar', desc: 'Sevimli yotoqxona va kvartiralar.' },
-  { href: '/dashboard/student' as Route, icon: '⚙️', title: 'Sozlamalar', desc: "Telefon, parol, til va sozlamalarni o'zgartirish." },
-  { href: '/' as Route, icon: '❓', title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
+  { href: '/dashboard/student' as Route, icon: Home, title: 'Mening yashash joyim', desc: "Joriy turar joyingiz, xona va yashash holatini ko'rish." },
+  { href: '/dashboard/student' as Route, icon: FileText, title: 'Mening arizalarim', desc: 'Yotoqxona, kvartira yoki xostelga barcha arizalar.' },
+  { href: '/dashboard/student' as Route, icon: CreditCard, title: "To'lovlar", desc: "To'lovlar tarixi, Payme/Click cheklari, qarzdorliklar." },
+  { href: '/favorites' as Route, icon: Heart, title: 'Saqlangan joylar', desc: 'Sevimli yotoqxona va kvartiralar.' },
+  { href: '/dashboard/student' as Route, icon: Settings, title: 'Sozlamalar', desc: "Telefon, parol, til va sozlamalarni o'zgartirish." },
+  { href: '/' as Route, icon: HelpCircle, title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
 ];
 
 const universityMenu: MenuItem[] = [
-  { href: '/dashboard/listings/new' as Route, icon: '➕', title: "Yangi e'lon qo'shish", desc: "Yangi turar joy e'lonini platformaga joylashtirish." },
-  { href: '/dashboard/admin' as Route, icon: '🏢', title: 'Boshqaruv paneli', desc: 'Bino, xona va joylar holatining umumiy ko\'rinishi.' },
-  { href: '/dashboard/listings' as Route, icon: '🛏️', title: "E'lonlarni boshqarish", desc: "Barcha e'lonlarni ko'rish va moderatsiya qilish." },
-  { href: '/dashboard/admin' as Route, icon: '📥', title: 'Arizalar va navbat', desc: 'Talabalar arizalarini ko\'rib chiqish va navbatni boshqarish.' },
-  { href: '/dashboard/admin' as Route, icon: '💳', title: "To'lovlar va hisobotlar", desc: 'Tushumlar, qarzdorliklar va moliyaviy hisobotlar.' },
-  { href: '/dashboard/admin' as Route, icon: '⚙️', title: 'Sozlamalar', desc: 'Tashkilot va akkaunt sozlamalari.' },
-  { href: '/' as Route, icon: '❓', title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
+  { href: '/dashboard/listings/new' as Route, icon: Plus, title: "Yangi e'lon qo'shish", desc: "Yangi turar joy e'lonini platformaga joylashtirish." },
+  { href: '/dashboard/admin' as Route, icon: Building2, title: 'Boshqaruv paneli', desc: 'Bino, xona va joylar holatining umumiy ko\'rinishi.' },
+  { href: '/dashboard/listings' as Route, icon: Home, title: "E'lonlarni boshqarish", desc: "Barcha e'lonlarni ko'rish va moderatsiya qilish." },
+  { href: '/dashboard/admin' as Route, icon: Inbox, title: 'Arizalar va navbat', desc: 'Talabalar arizalarini ko\'rib chiqish va navbatni boshqarish.' },
+  { href: '/dashboard/admin' as Route, icon: CreditCard, title: "To'lovlar va hisobotlar", desc: 'Tushumlar, qarzdorliklar va moliyaviy hisobotlar.' },
+  { href: '/dashboard/admin' as Route, icon: Settings, title: 'Sozlamalar', desc: 'Tashkilot va akkaunt sozlamalari.' },
+  { href: '/' as Route, icon: HelpCircle, title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
 ];
 
 const privateMenu: MenuItem[] = [
-  { href: '/dashboard/listings/new' as Route, icon: '➕', title: "Yangi e'lon qo'shish", desc: "Yangi turar joy e'lonini platformaga joylashtirish." },
-  { href: '/dashboard/listings' as Route, icon: '🏠', title: "E'lonlarim", desc: "Joylashtirilgan kvartira, xona va xostel e'lonlari." },
-  { href: '/dashboard/provider' as Route, icon: '📥', title: 'Arizalar', desc: "Ijaraga olish bo'yicha kelib tushgan so'rovlar." },
-  { href: '/dashboard/provider' as Route, icon: '💳', title: "To'lovlar", desc: "Ijaraga oluvchilar to'lovlari va tushumlar." },
-  { href: '/dashboard/provider' as Route, icon: '🛡️', title: 'Tekshiruv holati', desc: 'OneID va davlat tekshiruvi holatini ko\'rish.' },
-  { href: '/dashboard/provider' as Route, icon: '⚙️', title: 'Sozlamalar', desc: 'Telefon, parol va akkaunt sozlamalari.' },
-  { href: '/' as Route, icon: '❓', title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
+  { href: '/dashboard/listings/new' as Route, icon: Plus, title: "Yangi e'lon qo'shish", desc: "Yangi turar joy e'lonini platformaga joylashtirish." },
+  { href: '/dashboard/listings' as Route, icon: Home, title: "E'lonlarim", desc: "Joylashtirilgan kvartira, xona va xostel e'lonlari." },
+  { href: '/dashboard/provider' as Route, icon: Inbox, title: 'Arizalar', desc: "Ijaraga olish bo'yicha kelib tushgan so'rovlar." },
+  { href: '/dashboard/provider' as Route, icon: CreditCard, title: "To'lovlar", desc: "Ijaraga oluvchilar to'lovlari va tushumlar." },
+  { href: '/dashboard/provider' as Route, icon: ShieldCheck, title: 'Tekshiruv holati', desc: 'OneID va davlat tekshiruvi holatini ko\'rish.' },
+  { href: '/dashboard/provider' as Route, icon: Settings, title: 'Sozlamalar', desc: 'Telefon, parol va akkaunt sozlamalari.' },
+  { href: '/' as Route, icon: HelpCircle, title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
 ];
 
 const notificationsByRole: Record<SessionUser['role'], string[]> = {
@@ -254,7 +270,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                   <span className={styles.username}>
                     {user.displayName.split(' ')[0]}
                   </span>
-                  <span className={styles.caret}>▾</span>
+                  <ChevronDown size={14} className={styles.caret} />
                 </button>
                 {isProfileOpen && (
                   <div className={styles.dropdown}>
@@ -268,7 +284,9 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                     <div className={styles.dropItems}>
                       {menu.map((item) => (
                         <Link key={item.title} href={item.href} className={styles.dropItem}>
-                          <span className={styles.dropItemIcon}>{item.icon}</span>
+                          <span className={styles.dropItemIcon}>
+                            <item.icon size={16} strokeWidth={2} />
+                          </span>
                           <span className={styles.dropItemBody}>
                             <span className={styles.dropItemTitle}>{item.title}</span>
                             <span className={styles.dropItemDesc}>{item.desc}</span>
@@ -285,7 +303,9 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                         setIsLogoutConfirmOpen(true);
                       }}
                     >
-                      <span className={styles.dropItemIcon}>🚪</span>
+                      <span className={styles.dropItemIcon}>
+                        <LogOut size={16} strokeWidth={2} />
+                      </span>
                       <span className={styles.dropItemTitle}>Chiqish</span>
                     </button>
                   </div>
@@ -301,7 +321,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
             onClick={() => setIsMobileOpen((v) => !v)}
             aria-label="Menyu"
           >
-            ☰
+            <Menu size={20} />
           </button>
         </div>
       </div>
@@ -332,7 +352,9 @@ export function SiteHeader({ user }: SiteHeaderProps) {
       {isLogoutConfirmOpen && (
         <div className={styles.modalOverlay} onClick={() => setIsLogoutConfirmOpen(false)}>
           <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalIcon}>🚪</div>
+            <div className={styles.modalIcon}>
+              <LogOut size={24} strokeWidth={2} color="#e74c3c" />
+            </div>
             <h3 className={styles.modalTitle}>Profildan chiqmoqchimisiz?</h3>
             <p className={styles.modalText}>
               Tizimdan chiqsangiz, qaytadan kirish uchun email va parolingiz kerak bo&#39;ladi.

@@ -3,6 +3,7 @@
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Star } from 'lucide-react';
 import styles from './housing-detail.module.css';
 
 export default function AddReviewForm({ listingId, loggedIn }: { listingId: string; loggedIn: boolean }) {
@@ -64,7 +65,7 @@ export default function AddReviewForm({ listingId, loggedIn }: { listingId: stri
             onClick={() => setScore(n)}
             aria-label={`${n} yulduz`}
           >
-            ★
+            <Star size={22} fill={n <= (hoverScore || score) ? '#f5c518' : 'none'} />
           </button>
         ))}
       </div>

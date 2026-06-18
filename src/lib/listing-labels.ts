@@ -1,4 +1,15 @@
 import {
+  Car,
+  ChefHat,
+  type LucideIcon,
+  Plus,
+  Refrigerator,
+  ShowerHead,
+  Snowflake,
+  WashingMachine,
+  Wifi
+} from "lucide-react";
+import {
   ListingAmenity,
   ListingRequirement,
   ListingStatus,
@@ -12,15 +23,15 @@ export const LISTING_TYPE_LABELS: Record<ListingType, string> = {
   HOUSE: "Hovli / Uy"
 };
 
-export const AMENITY_LABELS: Record<ListingAmenity, { label: string; icon: string }> = {
-  WIFI: { label: "Wi-Fi", icon: "📶" },
-  AC: { label: "Konditsioner", icon: "❄️" },
-  WASHER: { label: "Kir yuvish mashinasi", icon: "🧺" },
-  FRIDGE: { label: "Muzlatgich", icon: "🧊" },
-  KITCHEN: { label: "Oshxona", icon: "🍳" },
-  PARKING: { label: "Parking", icon: "🚗" },
-  HOT_WATER: { label: "Issiq suv", icon: "🚿" },
-  OTHER: { label: "Boshqa", icon: "➕" }
+export const AMENITY_LABELS: Record<ListingAmenity, { label: string; icon: LucideIcon }> = {
+  WIFI: { label: "Wi-Fi", icon: Wifi },
+  AC: { label: "Konditsioner", icon: Snowflake },
+  WASHER: { label: "Kir yuvish mashinasi", icon: WashingMachine },
+  FRIDGE: { label: "Muzlatgich", icon: Refrigerator },
+  KITCHEN: { label: "Oshxona", icon: ChefHat },
+  PARKING: { label: "Parking", icon: Car },
+  HOT_WATER: { label: "Issiq suv", icon: ShowerHead },
+  OTHER: { label: "Boshqa", icon: Plus }
 };
 
 export const REQUIREMENT_LABELS: Record<ListingRequirement, string> = {

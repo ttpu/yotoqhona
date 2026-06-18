@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
+import { LocateFixed } from 'lucide-react';
 import '@/lib/leaflet-icon-fix';
 import 'leaflet/dist/leaflet.css';
 import styles from './map-picker.module.css';
@@ -48,7 +49,8 @@ export default function MapPicker({ lat, lng, onChange }: MapPickerProps) {
     <div>
       <div className={styles.toolbar}>
         <button type="button" className={styles.locateBtn} onClick={useMyLocation} disabled={locating}>
-          {locating ? 'Aniqlanmoqda...' : "📍 Joriy joylashuvimni aniqlash"}
+          <LocateFixed size={14} />
+          {locating ? 'Aniqlanmoqda...' : 'Joriy joylashuvimni aniqlash'}
         </button>
         {position && (
           <span className={styles.coords}>

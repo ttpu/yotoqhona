@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import type { Route } from 'next';
 import { notFound } from 'next/navigation';
+import { Check, Eye, Mail, Phone, SquarePen, Send, Star } from 'lucide-react';
 import { parseSessionCookie } from '@/lib/session';
 import {
   getListingWithStats,
@@ -36,7 +37,13 @@ const STATUS_TEXT: Record<ListingStatus, string> = {
 
 function Stars({ value }: { value: number }) {
   const rounded = Math.round(value);
-  return <span>{'★'.repeat(rounded)}{'☆'.repeat(5 - rounded)}</span>;
+  return (
+    <span style={{ display: 'inline-flex', gap: 1 }}>
+      {Array.from({ length: 5 }, (_, i) => (
+        <Star key={i} size={14} fill={i < rounded ? '#f5c518' : 'none'} color="#f5c518" />
+      ))}
+    </span>
+  );
 }
 
 export default async function HousingDetailPage({ params }: { params: { id: string } }) {
@@ -78,7 +85,7 @@ export default async function HousingDetailPage({ params }: { params: { id: stri
         {canManage && (
           <div className={styles.headActions}>
             <Link href={`/dashboard/listings/${listing.id}/edit` as Route} className={styles.btnEdit}>
-              ✎ Tahrirlash
+              <SquarePen size={15} /> Tahrirlash
             </Link>
           </div>
         )}
@@ -111,12 +118,15 @@ export default async function HousingDetailPage({ params }: { params: { id: stri
           <div className={styles.section}>
             <p className={styles.sectionTitle}>Qulayliklar</p>
             <div className={styles.chipRow}>
-              {listing.amenities.map((a) => (
-                <span key={a} className={styles.chip}>
-                  {AMENITY_LABELS[a].icon} {AMENITY_LABELS[a].label}
-                </span>
-              ))}
-              {listing.customAmenity && <span className={styles.chip}>✓ {listing.customAmenity}</span>}
+              {listing.amenities.map((a) => {
+                const AmenityIcon = AMENITY_LABELS[a].icon;
+                return (
+                  <span key={a} className={styles.chip}>
+                    <AmenityIcon size={14} /> {AMENITY_LABELS[a].label}
+                  </span>
+                );
+              })}
+              {listing.customAmenity && <span className={styles.chip}><Check size={14} /> {listing.customAmenity}</span>}
               {listing.amenities.length === 0 && !listing.customAmenity && (
                 <span className={styles.emptyReviews}>Qulayliklar ko&#39;rsatilmagan</span>
               )}
@@ -187,13 +197,13 @@ export default async function HousingDetailPage({ params }: { params: { id: stri
               {formatListingPrice(listing.price, listing.currency)} <span className={styles.priceUnit}>/ oy</span>
             </p>
             <div className={styles.statRow}>
-              <span>⭐ {listing.rating || '—'}</span>
-              <span>👁 {listing.viewCount} ko&#39;rishlar</span>
+              <span><Star size={14} fill="#f5c518" color="#f5c518" /> {listing.rating || '—'}</span>
+              <span><Eye size={14} /> {listing.viewCount} ko&#39;rishlar</span>
             </div>
 
             <div className={styles.contactList}>
               <a href={`tel:${listing.contactPhone}`} className={styles.contactBtn}>
-                📞 {listing.contactPhone}
+                <Phone size={15} /> {listing.contactPhone}
               </a>
               {telegramHandle && (
                 <a
@@ -202,12 +212,12 @@ export default async function HousingDetailPage({ params }: { params: { id: stri
                   rel="noreferrer"
                   className={`${styles.contactBtn} ${styles.contactBtnOutline}`}
                 >
-                  ✈️ Telegram
+                  <Send size={15} /> Telegram
                 </a>
               )}
               {listing.contactEmail && (
                 <a href={`mailto:${listing.contactEmail}`} className={`${styles.contactBtn} ${styles.contactBtnOutline}`}>
-                  ✉️ Email
+                  <Mail size={15} /> Email
                 </a>
               )}
             </div>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Heart } from 'lucide-react';
 import styles from '@/app/catalog/catalog.module.css';
 
 type FavoriteButtonProps = {
@@ -46,7 +47,7 @@ export default function FavoriteButton({ listingId, initialFavorited, loggedIn }
       disabled={busy}
       aria-label={favorited ? "Sevimlilardan o'chirish" : 'Sevimlilarga qo\'shish'}
     >
-      {favorited ? '❤️' : '🤍'}
+      <Heart size={15} fill={favorited ? '#e74c3c' : 'none'} color={favorited ? '#e74c3c' : '#999'} />
     </button>
   );
 }

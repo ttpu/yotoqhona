@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import { SearchX } from 'lucide-react';
 import { parseSessionCookie } from '@/lib/session';
 import { getFavoriteIds, listListings, ListingSort } from '@/lib/listings-store';
 import { AMENITY_LABELS, LISTING_TYPE_LABELS } from '@/lib/listing-labels';
@@ -124,17 +125,20 @@ export default async function CatalogPage({ searchParams }: { searchParams: Sear
         </div>
 
         <div className={styles.amenityRow}>
-          {AMENITY_OPTIONS.map((a) => (
-            <label key={a} className={styles.amenityChip}>
-              <input
-                type="checkbox"
-                name="amenities"
-                value={a}
-                defaultChecked={amenities.includes(a)}
-              />
-              {AMENITY_LABELS[a].icon} {AMENITY_LABELS[a].label}
-            </label>
-          ))}
+          {AMENITY_OPTIONS.map((a) => {
+            const AmenityIcon = AMENITY_LABELS[a].icon;
+            return (
+              <label key={a} className={styles.amenityChip}>
+                <input
+                  type="checkbox"
+                  name="amenities"
+                  value={a}
+                  defaultChecked={amenities.includes(a)}
+                />
+                <AmenityIcon size={14} /> {AMENITY_LABELS[a].label}
+              </label>
+            );
+          })}
         </div>
 
         <div className={styles.filterBtnRow}>
@@ -167,7 +171,7 @@ export default async function CatalogPage({ searchParams }: { searchParams: Sear
 
       {items.length === 0 ? (
         <div className={styles.empty}>
-          <div className={styles.emptyIcon}>🔍</div>
+          <div className={styles.emptyIcon}><SearchX size={36} /></div>
           <p>Hech qanday e&#39;lon topilmadi. Filtrlarni o&#39;zgartirib ko&#39;ring.</p>
         </div>
       ) : (

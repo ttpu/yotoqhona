@@ -4,6 +4,19 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import {
+  ClipboardList,
+  Flag,
+  FileText,
+  Images,
+  MapPin,
+  Phone,
+  RotateCcw,
+  Sparkles,
+  Upload,
+  Wallet,
+  X
+} from 'lucide-react';
+import {
   AMENITY_LABELS,
   LISTING_TYPE_LABELS,
   REQUIREMENT_LABELS,
@@ -178,7 +191,7 @@ export default function ListingForm({ mode, listingId, initialValues }: ListingF
         {error && <div className={styles.error}>{error}</div>}
 
         <section className={styles.section}>
-          <p className={styles.sectionTitle}>📝 Asosiy ma&#39;lumotlar</p>
+          <p className={styles.sectionTitle}><FileText size={16} /> Asosiy ma&#39;lumotlar</p>
           <div className={styles.field}>
             <label className={styles.label}>E&#39;lon nomi *</label>
             <input
@@ -213,7 +226,7 @@ export default function ListingForm({ mode, listingId, initialValues }: ListingF
         </section>
 
         <section className={styles.section}>
-          <p className={styles.sectionTitle}>📍 Joylashuv</p>
+          <p className={styles.sectionTitle}><MapPin size={16} /> Joylashuv</p>
           <div className={styles.field}>
             <label className={styles.label}>Manzil *</label>
             <input
@@ -242,7 +255,7 @@ export default function ListingForm({ mode, listingId, initialValues }: ListingF
         </section>
 
         <section className={styles.section}>
-          <p className={styles.sectionTitle}>💰 Narx va sig&#39;im</p>
+          <p className={styles.sectionTitle}><Wallet size={16} /> Narx va sig&#39;im</p>
           <div className={styles.field}>
             <label className={styles.label}>Oylik narx *</label>
             <div className={styles.priceRow}>
@@ -288,14 +301,17 @@ export default function ListingForm({ mode, listingId, initialValues }: ListingF
         </section>
 
         <section className={styles.section}>
-          <p className={styles.sectionTitle}>✨ Qulayliklar</p>
+          <p className={styles.sectionTitle}><Sparkles size={16} /> Qulayliklar</p>
           <div className={styles.checkGrid}>
-            {AMENITY_OPTIONS.map((a) => (
-              <label key={a} className={`${styles.checkItem} ${amenities.includes(a) ? styles.checkItemActive : ''}`}>
-                <input type="checkbox" checked={amenities.includes(a)} onChange={() => toggleAmenity(a)} />
-                {AMENITY_LABELS[a].icon} {AMENITY_LABELS[a].label}
-              </label>
-            ))}
+            {AMENITY_OPTIONS.map((a) => {
+              const AmenityIcon = AMENITY_LABELS[a].icon;
+              return (
+                <label key={a} className={`${styles.checkItem} ${amenities.includes(a) ? styles.checkItemActive : ''}`}>
+                  <input type="checkbox" checked={amenities.includes(a)} onChange={() => toggleAmenity(a)} />
+                  <AmenityIcon size={14} /> {AMENITY_LABELS[a].label}
+                </label>
+              );
+            })}
           </div>
           <div className={styles.field} style={{ marginTop: 14 }}>
             <label className={styles.label}>Boshqa qulayliklar</label>
@@ -309,7 +325,7 @@ export default function ListingForm({ mode, listingId, initialValues }: ListingF
         </section>
 
         <section className={styles.section}>
-          <p className={styles.sectionTitle}>🖼️ Fotosuratlar * (kamida 1 ta)</p>
+          <p className={styles.sectionTitle}><Images size={16} /> Fotosuratlar * (kamida 1 ta)</p>
 
           {existingImages.length > 0 && (
             <div className={styles.previewGrid}>
@@ -322,7 +338,7 @@ export default function ListingForm({ mode, listingId, initialValues }: ListingF
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={img.path} alt="" />
                   <button type="button" className={styles.previewRemove} onClick={() => toggleRemoveExisting(img.path)}>
-                    {img.markedForRemoval ? '↺' : '✕'}
+                    {img.markedForRemoval ? <RotateCcw size={12} /> : <X size={12} />}
                   </button>
                 </div>
               ))}
@@ -330,7 +346,7 @@ export default function ListingForm({ mode, listingId, initialValues }: ListingF
           )}
 
           <label className={styles.dropzone} style={{ marginTop: existingImages.length ? 14 : 0, display: 'block' }}>
-            <div className={styles.dropzoneIcon}>📤</div>
+            <div className={styles.dropzoneIcon}><Upload size={26} /></div>
             <div className={styles.dropzoneText}>Rasmlarni tanlash uchun bosing</div>
             <div className={styles.dropzoneHint}>JPG, PNG — bir nechta rasm tanlash mumkin</div>
             <input type="file" accept="image/*" multiple hidden onChange={(e) => onFilesPicked(e.target.files)} />
@@ -344,7 +360,7 @@ export default function ListingForm({ mode, listingId, initialValues }: ListingF
                   <img src={img.url} alt="" />
                   <span className={styles.previewBadge}>YANGI</span>
                   <button type="button" className={styles.previewRemove} onClick={() => removeNewImage(idx)}>
-                    ✕
+                    <X size={12} />
                   </button>
                 </div>
               ))}
@@ -353,7 +369,7 @@ export default function ListingForm({ mode, listingId, initialValues }: ListingF
         </section>
 
         <section className={styles.section}>
-          <p className={styles.sectionTitle}>☎️ Kontakt ma&#39;lumotlari</p>
+          <p className={styles.sectionTitle}><Phone size={16} /> Kontakt ma&#39;lumotlari</p>
           <div className={styles.field}>
             <label className={styles.label}>Telefon raqami *</label>
             <input
@@ -387,7 +403,7 @@ export default function ListingForm({ mode, listingId, initialValues }: ListingF
         </section>
 
         <section className={styles.section}>
-          <p className={styles.sectionTitle}>📋 Qo&#39;shimcha talablar</p>
+          <p className={styles.sectionTitle}><ClipboardList size={16} /> Qo&#39;shimcha talablar</p>
           <div className={styles.checkGrid}>
             {REQUIREMENT_OPTIONS.map((r) => (
               <label key={r} className={`${styles.checkItem} ${requirements.includes(r) ? styles.checkItemActive : ''}`}>
@@ -409,7 +425,7 @@ export default function ListingForm({ mode, listingId, initialValues }: ListingF
 
         {mode === 'edit' && (
           <section className={styles.section}>
-            <p className={styles.sectionTitle}>📌 E&#39;lon holati</p>
+            <p className={styles.sectionTitle}><Flag size={16} /> E&#39;lon holati</p>
             <div className={styles.field}>
               <select className={styles.select} value={status} onChange={(e) => setStatus(e.target.value as ListingStatus)}>
                 {Object.entries(STATUS_LABELS).map(([key, val]) => (

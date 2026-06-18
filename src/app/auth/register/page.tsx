@@ -4,6 +4,19 @@ import { FormEvent, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import type { Route } from 'next';
+import {
+  Building2,
+  Check,
+  Clock,
+  CreditCard,
+  GraduationCap,
+  Home,
+  IdCard,
+  Landmark,
+  Lock,
+  PartyPopper,
+  User,
+} from 'lucide-react';
 import styles from '../auth.module.css';
 
 type MainFlow = 'student' | 'provider';
@@ -170,7 +183,7 @@ export default function RegisterPage() {
         <div className={styles.steps}>
           <div className={styles.stepItem}>
             <div className={`${styles.stepNum} ${step >= 1 ? (step > 1 ? styles.done : styles.active) : ''}`}>
-              {step > 1 ? '✓' : '1'}
+              {step > 1 ? <Check size={14} /> : '1'}
             </div>
             <span className={`${styles.stepLabel} ${step === 1 ? styles.active : step > 1 ? styles.done : ''}`}>
               Rol tanlash
@@ -179,7 +192,7 @@ export default function RegisterPage() {
           <div className={`${styles.stepLine} ${step > 1 ? styles.done : ''}`} />
           <div className={styles.stepItem}>
             <div className={`${styles.stepNum} ${step >= 2 ? (step > 2 ? styles.done : styles.active) : ''}`}>
-              {step > 2 ? '✓' : '2'}
+              {step > 2 ? <Check size={14} /> : '2'}
             </div>
             <span className={`${styles.stepLabel} ${step === 2 ? styles.active : step > 2 ? styles.done : ''}`}>
               Ma&#39;lumotlar
@@ -188,7 +201,7 @@ export default function RegisterPage() {
           <div className={`${styles.stepLine} ${step > 2 ? styles.done : ''}`} />
           <div className={styles.stepItem}>
             <div className={`${styles.stepNum} ${step >= 3 ? styles.active : ''}`}>
-              {step >= 3 ? '✓' : '3'}
+              {step >= 3 ? <Check size={14} /> : '3'}
             </div>
             <span className={`${styles.stepLabel} ${step === 3 ? styles.active : ''}`}>
               Tayyor
@@ -199,7 +212,7 @@ export default function RegisterPage() {
         {/* ===== SUCCESS STATE ===== */}
         {done && (
           <div className={styles.successWrap}>
-            <div className={styles.successIcon}>🎉</div>
+            <div className={styles.successIcon}><PartyPopper size={28} /></div>
             <h2 className={styles.successTitle}>Muvaffaqiyatli ro&#39;yxatdan o&#39;tdingiz!</h2>
             <p className={styles.successText}>
               Siz tizimga yo&#39;naltirilmoqdasiz...
@@ -221,7 +234,7 @@ export default function RegisterPage() {
                     className={`${styles.roleCard} ${mainFlow === 'student' ? styles.selected : ''}`}
                     onClick={() => { setMainFlow('student'); setProviderFlow(null); }}
                   >
-                    <span className={styles.roleCardIcon}>🎓</span>
+                    <span className={styles.roleCardIcon}><GraduationCap size={28} /></span>
                     <h3>Talaba</h3>
                     <p>Turar joy qidirish, ariza yuborish va to&#39;lovlarni boshqarish uchun</p>
                   </button>
@@ -231,7 +244,7 @@ export default function RegisterPage() {
                     className={`${styles.roleCard} ${mainFlow === 'provider' ? styles.selected : ''}`}
                     onClick={() => setMainFlow('provider')}
                   >
-                    <span className={styles.roleCardIcon}>🏢</span>
+                    <span className={styles.roleCardIcon}><Building2 size={28} /></span>
                     <h3>Turar joy egasi</h3>
                     <p>Yotoqxona, xostel yoki ijara uylarini ro&#39;yxatdan o&#39;tkazish uchun</p>
                   </button>
@@ -248,7 +261,7 @@ export default function RegisterPage() {
                         className={`${styles.roleCard} ${providerFlow === 'UNIVERSITY_ADMINISTRATION' ? styles.selected : ''}`}
                         onClick={() => setProviderFlow('UNIVERSITY_ADMINISTRATION')}
                       >
-                        <span className={styles.roleCardIcon}>🏛️</span>
+                        <span className={styles.roleCardIcon}><Landmark size={28} /></span>
                         <h3>Universitet boshqarmasi</h3>
                         <p>Rasmiy universitetlar va talabalar turar joylar uchun</p>
                       </button>
@@ -257,7 +270,7 @@ export default function RegisterPage() {
                         className={`${styles.roleCard} ${providerFlow === 'PRIVATE_PROVIDER' ? styles.selected : ''}`}
                         onClick={() => setProviderFlow('PRIVATE_PROVIDER')}
                       >
-                        <span className={styles.roleCardIcon}>🏠</span>
+                        <span className={styles.roleCardIcon}><Home size={28} /></span>
                         <h3>Xususiy egasi</h3>
                         <p>Kvartira, hovli yoki xostel egasi uchun</p>
                       </button>
@@ -279,7 +292,7 @@ export default function RegisterPage() {
 
                     {/* Personal info */}
                     <div className={styles.formSection}>
-                      <p className={styles.formSectionTitle}>👤 Shaxsiy ma&#39;lumotlar</p>
+                      <p className={styles.formSectionTitle}><User size={16} /> Shaxsiy ma&#39;lumotlar</p>
                       <div className={styles.formGrid}>
                         <div className={styles.field}>
                           <label className={styles.label}>Ism *</label>
@@ -343,7 +356,7 @@ export default function RegisterPage() {
 
                     {/* University info */}
                     <div className={styles.formSection}>
-                      <p className={styles.formSectionTitle}>🎓 O&#39;quv muassasasi</p>
+                      <p className={styles.formSectionTitle}><GraduationCap size={16} /> O&#39;quv muassasasi</p>
                       <div className={styles.formGrid}>
                         <div className={styles.field}>
                           <label className={styles.label}>Universitet *</label>
@@ -382,7 +395,7 @@ export default function RegisterPage() {
 
                     {/* Password */}
                     <div className={styles.formSection}>
-                      <p className={styles.formSectionTitle}>🔒 Xavfsizlik</p>
+                      <p className={styles.formSectionTitle}><Lock size={16} /> Xavfsizlik</p>
                       <div className={styles.formGrid}>
                         <div className={styles.field}>
                           <label className={styles.label}>Parol *</label>
@@ -424,7 +437,8 @@ export default function RegisterPage() {
                     </div>
 
                     <div className={styles.verifyNote}>
-                      🪪 OneID orqali shaxsingizni tasdiqlang va <strong>Verified Talaba</strong> nishonini oling.
+                      <IdCard size={16} style={{ flexShrink: 0, marginTop: 1 }} />
+                      <span>OneID orqali shaxsingizni tasdiqlang va <strong>Verified Talaba</strong> nishonini oling.</span>
                     </div>
                   </>
                 )}
@@ -436,7 +450,7 @@ export default function RegisterPage() {
                     <p className={styles.subtitle}>Hisob yaratilgach status tekshiruvga yuboriladi</p>
 
                     <div className={styles.formSection}>
-                      <p className={styles.formSectionTitle}>🏛️ Muassasa ma&#39;lumotlari</p>
+                      <p className={styles.formSectionTitle}><Landmark size={16} /> Muassasa ma&#39;lumotlari</p>
                       <div className={styles.formGrid}>
                         <div className={styles.field}>
                           <label className={styles.label}>Rasmiy nomi *</label>
@@ -472,7 +486,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div className={styles.formSection}>
-                      <p className={styles.formSectionTitle}>👤 Mas&#39;ul shaxs</p>
+                      <p className={styles.formSectionTitle}><User size={16} /> Mas&#39;ul shaxs</p>
                       <div className={styles.formGrid}>
                         <div className={styles.field}>
                           <label className={styles.label}>To&#39;liq ismi *</label>
@@ -498,7 +512,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div className={styles.formSection}>
-                      <p className={styles.formSectionTitle}>💳 Moliyaviy ma&#39;lumotlar</p>
+                      <p className={styles.formSectionTitle}><CreditCard size={16} /> Moliyaviy ma&#39;lumotlar</p>
                       <div className={styles.formGrid}>
                         <div className={styles.field}>
                           <label className={styles.label}>Bank hisob raqami *</label>
@@ -519,7 +533,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div className={styles.formSection}>
-                      <p className={styles.formSectionTitle}>🔒 Xavfsizlik</p>
+                      <p className={styles.formSectionTitle}><Lock size={16} /> Xavfsizlik</p>
                       <div className={styles.formGrid}>
                         <div className={styles.field}>
                           <label className={styles.label}>Parol *</label>
@@ -548,7 +562,8 @@ export default function RegisterPage() {
                     </div>
 
                     <div className={styles.pendingNote}>
-                      ⏳ Arizangiz yuborilgandan keyin <strong>1-3 ish kuni</strong> ichida tekshiriladi va siz email orqali xabardor qilinasiz.
+                      <Clock size={16} style={{ flexShrink: 0, marginTop: 1 }} />
+                      <span>Arizangiz yuborilgandan keyin <strong>1-3 ish kuni</strong> ichida tekshiriladi va siz email orqali xabardor qilinasiz.</span>
                     </div>
                   </>
                 )}
@@ -560,7 +575,7 @@ export default function RegisterPage() {
                     <p className={styles.subtitle}>Listinglar joylashdan oldin OneID tekshiruvi talab qilinadi</p>
 
                     <div className={styles.formSection}>
-                      <p className={styles.formSectionTitle}>👤 Shaxsiy ma&#39;lumotlar</p>
+                      <p className={styles.formSectionTitle}><User size={16} /> Shaxsiy ma&#39;lumotlar</p>
                       <div className={styles.formGrid}>
                         <div className={styles.field}>
                           <label className={styles.label}>To&#39;liq ism *</label>
@@ -586,7 +601,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div className={styles.formSection}>
-                      <p className={styles.formSectionTitle}>🏠 Mulk ma&#39;lumotlari</p>
+                      <p className={styles.formSectionTitle}><Home size={16} /> Mulk ma&#39;lumotlari</p>
                       <div className={styles.formGrid}>
                         <div className={styles.field}>
                           <label className={styles.label}>Mulk turi *</label>
@@ -617,7 +632,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div className={styles.formSection}>
-                      <p className={styles.formSectionTitle}>🔒 Xavfsizlik</p>
+                      <p className={styles.formSectionTitle}><Lock size={16} /> Xavfsizlik</p>
                       <div className={styles.formGrid}>
                         <div className={styles.field}>
                           <label className={styles.label}>Parol *</label>

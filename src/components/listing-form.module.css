@@ -29,9 +29,12 @@
 }
 
 .sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 15px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: #1a3c34;
   padding-bottom: 12px;
   border-bottom: 1.5px solid #f0f0f0;
   margin-bottom: 18px;

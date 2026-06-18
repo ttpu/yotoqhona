@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { Heart } from 'lucide-react';
 import { parseSessionCookie } from '@/lib/session';
 import { getFavoriteListings } from '@/lib/listings-store';
 import ListingCard from '@/components/listing-card';
@@ -22,7 +23,7 @@ export default async function FavoritesPage() {
 
       {items.length === 0 ? (
         <div className={catalogStyles.empty}>
-          <div className={catalogStyles.emptyIcon}>🤍</div>
+          <div className={catalogStyles.emptyIcon}><Heart size={36} /></div>
           <p>Hozircha sevimlilar bo&#39;sh. Katalogdan yoqtirgan joylaringizni belgilang.</p>
         </div>
       ) : (

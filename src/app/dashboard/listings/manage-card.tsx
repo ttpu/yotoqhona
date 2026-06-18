@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { Route } from 'next';
+import { Eye, MessageCircle, Star, Trash2 } from 'lucide-react';
 import { LISTING_TYPE_LABELS, STATUS_LABELS, formatListingPrice } from '@/lib/listing-labels';
 import type { ListingStatus, ListingWithStats } from '@/lib/listing-types';
 import styles from './manage-card.module.css';
@@ -66,9 +67,9 @@ export default function ManageCard({ listing, showOwner }: ManageCardProps) {
           {LISTING_TYPE_LABELS[listing.type]} · {listing.address}
         </p>
         <div className={styles.metaRow}>
-          <span>⭐ {listing.rating || '—'}</span>
-          <span>👁 {listing.viewCount}</span>
-          <span>💬 {listing.reviewCount}</span>
+          <span><Star size={13} fill="#f5c518" color="#f5c518" /> {listing.rating || '—'}</span>
+          <span><Eye size={13} /> {listing.viewCount}</span>
+          <span><MessageCircle size={13} /> {listing.reviewCount}</span>
         </div>
         <p className={styles.price}>{formatListingPrice(listing.price, listing.currency)} / oy</p>
 
@@ -101,7 +102,9 @@ export default function ManageCard({ listing, showOwner }: ManageCardProps) {
       {confirmOpen && (
         <div className={styles.modalOverlay} onClick={() => setConfirmOpen(false)}>
           <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalIcon}>🗑️</div>
+            <div className={styles.modalIcon}>
+              <Trash2 size={24} color="#e74c3c" />
+            </div>
             <h3 className={styles.modalTitle}>E&#39;lonni o&#39;chirmoqchimisiz?</h3>
             <p className={styles.modalText}>
               &#34;{listing.title}&#34; butunlay o&#39;chiriladi. Bu amalni qaytarib bo&#39;lmaydi.
