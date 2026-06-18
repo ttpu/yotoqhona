@@ -88,7 +88,7 @@ export default async function HomePage() {
         {/* Background image */}
         <div className={styles.heroBgWrap}>
           <Image
-            src="/image_student_globall3.png"
+            src="/image_student_globall4.png"
             alt="Talaba yotoqxonada"
             fill
             className={styles.heroBgImg}
