@@ -5,19 +5,24 @@ import { cookies } from 'next/headers';
 import {
   BadgeCheck,
   BarChart3,
+  Building2,
   Camera,
   CreditCard,
   FileText,
   GraduationCap,
   Handshake,
+  Home as HomeIcon,
   LayoutDashboard,
   Lock,
   Mail,
   MapPin,
   Phone,
   Play,
+  Search,
   Send,
   ShieldCheck,
+  Users,
+  Wallet,
   Zap,
   type LucideIcon
 } from 'lucide-react';
@@ -32,24 +37,24 @@ import styles from '@/app/page.module.css';
 // iconSrc: '' o'rniga yo'lni yozing, masalan: '/icons/shield.png'
 // =====================================================================
 
-const aboutCards = [
+const aboutCards: { icon: LucideIcon; title: string; text: string }[] = [
   {
-    iconSrc: '/icons/301177_shield-checkmark-icon.png',
+    icon: ShieldCheck,
     title: 'Tasdiqlangan turar joylar',
     text: "Barcha joylar tekshiruvidan o'tkazilgan va tasdiqlangan.",
   },
   {
-    iconSrc: '/icons/301168_people-icon.png',
+    icon: GraduationCap,
     title: 'Universitetlar bilan integratsiya',
     text: 'Rasmiy hamkorlik orqali ishonchli xizmat.',
   },
   {
-    iconSrc: '/icons/301175_search-icon.png',
+    icon: Search,
     title: 'Qulay qidiruv va xaritalar',
     text: 'Xarita orqali joyashuvni oson toping.',
   },
   {
-    iconSrc: '/icons/301185_wallet-icon.png',
+    icon: Wallet,
     title: "Onlayn to'lov va boshqaruv",
     text: "Xavfsiz to'lov qiling va arizalaringizni boshqaring.",
   },
@@ -175,10 +180,7 @@ export default async function HomePage() {
           {aboutCards.map((card) => (
             <article className={styles.featureCard} key={card.title}>
               <div className={styles.featureIcon}>
-                {card.iconSrc
-                  ? <Image src={card.iconSrc} alt={card.title} width={44} height={44} />
-                  : <div className={styles.iconSlot} />
-                }
+                <card.icon size={22} />
               </div>
               <h4>{card.title}</h4>
               <p>{card.text}</p>
@@ -280,28 +282,28 @@ export default async function HomePage() {
         <div className={styles.statsBannerTitle}>TalabaJoy<br />raqamlarda</div>
         <div className={styles.statsGrid}>
           <div className={styles.statItem}>
-            <div className={styles.statIconBox}> </div>
+            <div className={styles.statIconBox}><Building2 size={20} /></div>
             <div>
               <div className={styles.statNum}>20+</div>
               <div className={styles.statLabel}>Hamkor universitetlar</div>
             </div>
           </div>
           <div className={styles.statItem}>
-            <div className={styles.statIconBox}> </div>
+            <div className={styles.statIconBox}><Users size={20} /></div>
             <div>
               <div className={styles.statNum}>5000+</div>
               <div className={styles.statLabel}>Talabalar</div>
             </div>
           </div>
           <div className={styles.statItem}>
-            <div className={styles.statIconBox}> </div>
+            <div className={styles.statIconBox}><HomeIcon size={20} /></div>
             <div>
               <div className={styles.statNum}>2000+</div>
               <div className={styles.statLabel}>Mavjud joylar</div>
             </div>
           </div>
           <div className={styles.statItem}>
-            <div className={styles.statIconBox}> </div>
+            <div className={styles.statIconBox}><BadgeCheck size={20} /></div>
             <div>
               <div className={styles.statNum}>500+</div>
               <div className={styles.statLabel}>Tasdiqlangan obyektlar</div>
