@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import type { Route } from 'next';
 import { notFound } from 'next/navigation';
-import { Check, Eye, Mail, Phone, SquarePen, Send, Star } from 'lucide-react';
+import { BadgeCheck, Check, Eye, Mail, Phone, SquarePen, Send, Star } from 'lucide-react';
 import { parseSessionCookie } from '@/lib/session';
 import {
   getListingWithStats,
@@ -77,6 +77,11 @@ export default async function HousingDetailPage({ params }: { params: { id: stri
             <span className={`${styles.statusBadge} ${styles[STATUS_CLASS[listing.status]]}`}>
               {STATUS_TEXT[listing.status]}
             </span>
+            {listing.verified && (
+              <span className={styles.verifiedBadge}>
+                <BadgeCheck size={13} /> Rasmiy
+              </span>
+            )}
             <span>{LISTING_TYPE_LABELS[listing.type]}</span>
             <span>·</span>
             <span>{listing.address}, {listing.city}</span>

@@ -25,7 +25,7 @@ async function ensureUser(input: Parameters<typeof createStoredUser>[0]) {
 
 type DemoListingInput = Omit<
   Listing,
-  "id" | "ownerId" | "ownerRole" | "ownerName" | "viewCount" | "createdAt" | "updatedAt" | "status"
+  "id" | "ownerId" | "ownerRole" | "ownerName" | "viewCount" | "createdAt" | "updatedAt" | "status" | "verified"
 >;
 
 async function main() {
@@ -47,7 +47,7 @@ async function main() {
   const university = await ensureUser({
     email: "demo.university@talabajoy.uz",
     password: DEMO_PASSWORD,
-    displayName: "TDTU Yotoqxona Boshqarmasi",
+    displayName: "TTPU Yotoqxona Boshqarmasi",
     role: "UNIVERSITY_PROVIDER",
     status: "ACTIVE",
     verified: true,

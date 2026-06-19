@@ -10,6 +10,7 @@
  */
 import { findUserByEmail, setUserGender } from "../src/lib/auth-store";
 import { getBuildingByUniversityId, seedBookings, seedBuilding } from "../src/lib/dormitory-store";
+import { createListing, toggleFavorite } from "../src/lib/listings-store";
 import type {
   BedGender,
   DormBuilding,
@@ -18,6 +19,9 @@ import type {
   DormRoom,
   RoomBooking
 } from "../src/lib/dormitory-types";
+
+const BUILDING_LAT = 41.328;
+const BUILDING_LNG = 69.276;
 
 const FACILITIES: DormFloorFacilities = {
   diningHalls: 1,
@@ -140,6 +144,46 @@ async function main() {
 
   await seedBuilding(building, floors, rooms);
   console.log(`Seeded building "${building.name}" with ${floors.length} floors and ${rooms.length} rooms.`);
+
+  // ===== Public catalog listing for the dormitory, marked official =====
+  const totalCapacity = rooms.reduce((sum, r) => sum + r.capacity, 0);
+  const listing = await createListing({
+    id: crypto.randomUUID(),
+    ownerId: university.id,
+    ownerRole: "UNIVERSITY_PROVIDER",
+    ownerName: university.organizationName ?? university.displayName,
+    title: building.name,
+    description:
+      `${building.name} — ${building.totalFloors} qavatli, ${building.totalRooms} xonali rasmiy talabalar turar joyi. ` +
+      "Har bir xonada 4 talaba, 4 krovat, 4 tumbochka va 4 shkaf mavjud. Har qavatda oshxona, muzlatgichlar, " +
+      "mikroto'lqinli pechlar, dush va hojatxona kabinalari, kir yuvish mashinalari bor. Hududda sport maydonchasi, " +
+      "coworking zona va bepul Wi-Fi mavjud.",
+    type: "DORMITORY",
+    address: building.address,
+    city: "Toshkent",
+    lat: BUILDING_LAT,
+    lng: BUILDING_LNG,
+    price: 350000,
+    currency: "UZS",
+    roomsCount: building.totalRooms,
+    capacity: totalCapacity,
+    amenities: ["WIFI", "HOT_WATER", "KITCHEN"],
+    customAmenity: building.amenities.join(", "),
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=1200&q=80"
+    ],
+    contactPhone: "+998901112299",
+    contactEmail: university.email,
+    requirements: ["STUDENTS_ONLY"],
+    verified: true
+  });
+  console.log(`Created official catalog listing "${listing.title}" (verified).`);
+
+  if (demoStudent) {
+    await toggleFavorite(demoStudent.id, listing.id);
+    console.log("Added the dormitory listing to demo.student@talabajoy.uz's favorites.");
+  }
 
   // ===== Bookings: realistic occupancy =====
   const bookings: RoomBooking[] = [];

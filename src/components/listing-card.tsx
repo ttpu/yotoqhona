@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Route } from 'next';
-import { Bed, Eye, Star } from 'lucide-react';
+import { BadgeCheck, Bed, Eye, Star } from 'lucide-react';
 import { LISTING_TYPE_LABELS, formatListingPrice } from '@/lib/listing-labels';
 import type { ListingStatus, ListingWithStats } from '@/lib/listing-types';
 import FavoriteButton from '@/components/favorite-button';
@@ -34,9 +34,16 @@ export default function ListingCard({ listing, loggedIn }: ListingCardProps) {
       <div className={styles.imageWrap}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={listing.images[0]} alt={listing.title} />
-        <span className={`${styles.statusBadge} ${styles[STATUS_CLASS[listing.status]]}`}>
-          {STATUS_TEXT[listing.status]}
-        </span>
+        <div className={styles.badgeStack}>
+          <span className={`${styles.statusBadge} ${styles[STATUS_CLASS[listing.status]]}`}>
+            {STATUS_TEXT[listing.status]}
+          </span>
+          {listing.verified && (
+            <span className={styles.verifiedBadge}>
+              <BadgeCheck size={12} /> Rasmiy
+            </span>
+          )}
+        </div>
         <FavoriteButton listingId={listing.id} initialFavorited={Boolean(listing.isFavorited)} loggedIn={loggedIn} />
       </div>
 

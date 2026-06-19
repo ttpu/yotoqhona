@@ -52,8 +52,9 @@ export type ListingFilters = {
 export type ListingSort = "price_asc" | "price_desc" | "rating" | "newest";
 
 export async function createListing(
-  input: Omit<Listing, "viewCount" | "createdAt" | "updatedAt" | "status"> & {
+  input: Omit<Listing, "viewCount" | "createdAt" | "updatedAt" | "status" | "verified"> & {
     status?: ListingStatus;
+    verified?: boolean;
   }
 ) {
   const listings = await readJson<Listing>(listingsFile);
@@ -61,6 +62,7 @@ export async function createListing(
   const listing: Listing = {
     ...input,
     status: input.status ?? "ACTIVE",
+    verified: input.verified ?? false,
     viewCount: 0,
     createdAt: now,
     updatedAt: now
@@ -177,6 +179,23 @@ export async function getListingWithStats(id: string): Promise<ListingWithStats 
   if (!listing) return null;
   const [withStats] = await attachStats([listing]);
   return withStats;
+}
+
+export type ListingLocation = {
+  id: string;
+  title: string;
+  type: ListingType;
+  price: number;
+  currency: Listing["currency"];
+  lat: number;
+  lng: number;
+};
+
+export async function getAllListingLocations(): Promise<ListingLocation[]> {
+  const listings = await readJson<Listing>(listingsFile);
+  return listings
+    .filter((l) => l.status === "ACTIVE")
+    .map((l) => ({ id: l.id, title: l.title, type: l.type, price: l.price, currency: l.currency, lat: l.lat, lng: l.lng }));
 }
 
 // ===== Reviews =====

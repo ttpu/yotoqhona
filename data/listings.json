@@ -41,8 +41,8 @@
     "id": "8de3c9da-4422-4633-af47-52d629516fa2",
     "ownerId": "626efe64-79a5-4a72-bb17-f977793376ab",
     "ownerRole": "UNIVERSITY_PROVIDER",
-    "ownerName": "TDTU Yotoqxona Boshqarmasi",
-    "title": "TDTU yotoqxonasi — standart xona",
+    "ownerName": "TTPU Yotoqxona Boshqarmasi",
+    "title": "TTPU yotoqxonasi — standart xona",
     "description": "Universitet hududida joylashgan, 24/7 xavfsizlik, isitiladigan xonalar va o'quv zonasi mavjud.",
     "type": "DORMITORY",
     "address": "Universitet ko'chasi 2",
@@ -63,7 +63,7 @@
       "https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80"
     ],
     "contactPhone": "+998901112202",
-    "contactEmail": "yotoqxona@tdtu.uz",
+    "contactEmail": "yotoqxona@polito.uz",
     "requirements": [
       "STUDENTS_ONLY",
       "NO_PETS"
@@ -147,7 +147,7 @@
     "id": "a87286af-918c-4bee-a42f-92e165671056",
     "ownerId": "626efe64-79a5-4a72-bb17-f977793376ab",
     "ownerRole": "UNIVERSITY_PROVIDER",
-    "ownerName": "TDTU Yotoqxona Boshqarmasi",
+    "ownerName": "TTPU Yotoqxona Boshqarmasi",
     "title": "Mirzo Ulug'bek — hamyonbop yotoqxona",
     "description": "Eng arzon narxlardan biri, umumiy oshxona va kir yuvish xonasi, talabalar uchun moslashtirilgan.",
     "type": "DORMITORY",
@@ -213,5 +213,46 @@
     "viewCount": 5,
     "createdAt": "2026-06-17T09:27:38.951Z",
     "updatedAt": "2026-06-17T09:27:38.951Z"
+  },
+  {
+    "id": "d0a76467-ab68-44b7-8736-c33d60a75ee0",
+    "ownerId": "626efe64-79a5-4a72-bb17-f977793376ab",
+    "ownerRole": "UNIVERSITY_PROVIDER",
+    "ownerName": "Toshkent Davlat Texnika Universiteti",
+    "title": "Turin Politexnika Universiteti talabalar turar joyi",
+    "description": "Turin Politexnika Universiteti talabalar turar joyi — 4 qavatli, 41 xonali rasmiy talabalar turar joyi. Har bir xonada 4 talaba, 4 krovat, 4 tumbochka va 4 shkaf mavjud. Har qavatda oshxona, muzlatgichlar, mikroto'lqinli pechlar, dush va hojatxona kabinalari, kir yuvish mashinalari bor. Hududda sport maydonchasi, coworking zona va bepul Wi-Fi mavjud.",
+    "type": "DORMITORY",
+    "address": "Toshkent shahri, Kichik Halqa Yo'li ko'chasi, 17-uy",
+    "city": "Toshkent",
+    "lat": 41.35168556332073,
+    "lng": 69.2185664176941,
+    "price": 550000,
+    "currency": "UZS",
+    "roomsCount": 41,
+    "capacity": 164,
+    "amenities": [
+      "WIFI",
+      "HOT_WATER",
+      "KITCHEN",
+      "WASHER",
+      "FRIDGE"
+    ],
+    "customAmenity": "Sport maydonchasi, Coworking zona, Bepul Wi-Fi",
+    "images": [
+      "/uploads/listings/d0a76467-ab68-44b7-8736-c33d60a75ee0/e89a811d-00ba-4d67-a4a3-13da07bb5eeb.jpg",
+      "/uploads/listings/d0a76467-ab68-44b7-8736-c33d60a75ee0/353f64a0-5eaf-4f91-a7c7-1cfa282c3ecb.jpg",
+      "/uploads/listings/d0a76467-ab68-44b7-8736-c33d60a75ee0/801789f6-b442-4d5f-908d-2d59b0de95fd.jpg",
+      "/uploads/listings/d0a76467-ab68-44b7-8736-c33d60a75ee0/6ab06c02-344d-4551-a8b2-4f4ad528ea68.jpg"
+    ],
+    "contactPhone": "+99871 203-07-77",
+    "contactEmail": "demo.university@talabajoy.uz",
+    "requirements": [
+      "STUDENTS_ONLY"
+    ],
+    "verified": true,
+    "status": "ACTIVE",
+    "viewCount": 4,
+    "createdAt": "2026-06-19T04:20:14.282Z",
+    "updatedAt": "2026-06-19T07:17:32.097Z"
   }
 ]

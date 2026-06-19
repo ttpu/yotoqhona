@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { Route } from 'next';
-import { Eye, MessageCircle, Star, Trash2 } from 'lucide-react';
+import { BadgeCheck, Eye, MessageCircle, Star, Trash2 } from 'lucide-react';
 import { LISTING_TYPE_LABELS, STATUS_LABELS, formatListingPrice } from '@/lib/listing-labels';
 import type { ListingStatus, ListingWithStats } from '@/lib/listing-types';
 import styles from './manage-card.module.css';
@@ -55,9 +55,16 @@ export default function ManageCard({ listing, showOwner }: ManageCardProps) {
       <div className={styles.imageWrap}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={listing.images[0]} alt={listing.title} />
-        <span className={`${styles.statusBadge} ${styles[STATUS_CLASS[listing.status]]}`}>
-          {STATUS_LABELS[listing.status].label}
-        </span>
+        <div className={styles.badgeStack}>
+          <span className={`${styles.statusBadge} ${styles[STATUS_CLASS[listing.status]]}`}>
+            {STATUS_LABELS[listing.status].label}
+          </span>
+          {listing.verified && (
+            <span className={styles.verifiedBadge}>
+              <BadgeCheck size={12} /> Rasmiy
+            </span>
+          )}
+        </div>
         {showOwner && <span className={styles.ownerBadge}>{listing.ownerName}</span>}
       </div>
 

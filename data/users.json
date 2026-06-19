@@ -52,7 +52,7 @@
   {
     "id": "59e938e4-1fea-4465-8424-7e3f3e0b3c4b",
     "email": "demo.student@talabajoy.uz",
-    "passwordHash": "$2b$10$j5xihkBooxqKMVcQgCbLXe8ldcoQl7NxJE8NSm9sCZNDjhaR.6j3G",
+    "passwordHash": "$2b$10$SloIvBdbuQwTQp/nyl7.uO6Kd7Z9OMihavE8.Z5iROOIekVbhwvRa",
     "displayName": "Demo Talaba",
     "role": "STUDENT",
     "status": "ACTIVE",
@@ -61,18 +61,20 @@
     "university": "Toshkent Davlat Texnika Universiteti",
     "faculty": "Kompyuter muhandisligi",
     "course": "2",
-    "gender": "MALE"
+    "gender": "MALE",
+    "phone": "+998901119988"
   },
   {
     "id": "626efe64-79a5-4a72-bb17-f977793376ab",
     "email": "demo.university@talabajoy.uz",
     "passwordHash": "$2b$10$aFMNa9jztjuZJzn4zb5q3.5GWLQjNQBJJh7AHhxV6CgBpVb2ph/He",
-    "displayName": "TDTU Yotoqxona Boshqarmasi",
+    "displayName": "TTPU Yotoqxona Boshqarmasi",
     "role": "UNIVERSITY_PROVIDER",
     "status": "ACTIVE",
     "verified": true,
     "createdAt": "2026-06-17T09:27:38.850Z",
-    "organizationName": "Toshkent Davlat Texnika Universiteti"
+    "organizationName": "Toshkent shahridagi Turin politexnika universiteti",
+    "phone": " +99871 203-07-77"
   },
   {
     "id": "e10a1024-6bb2-4b64-9a55-96fe4f4eb1d7",

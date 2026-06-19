@@ -2,10 +2,29 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Route } from 'next';
 import { cookies } from 'next/headers';
-import { Camera, Mail, MapPin, Phone, Play, Send } from 'lucide-react';
+import {
+  BadgeCheck,
+  BarChart3,
+  Camera,
+  CreditCard,
+  FileText,
+  GraduationCap,
+  Handshake,
+  LayoutDashboard,
+  Lock,
+  Mail,
+  MapPin,
+  Phone,
+  Play,
+  Send,
+  ShieldCheck,
+  Zap,
+  type LucideIcon
+} from 'lucide-react';
 import { parseSessionCookie } from '@/lib/session';
-import { getFavoriteIds, listListings } from '@/lib/listings-store';
+import { getAllListingLocations, getFavoriteIds, listListings } from '@/lib/listings-store';
 import ListingCard from '@/components/listing-card';
+import ListingsMap from '@/components/listings-map-loader';
 import styles from '@/app/page.module.css';
 
 // =====================================================================
@@ -36,33 +55,33 @@ const aboutCards = [
   },
 ];
 
-const missionPillars = [
+const missionPillars: { icon: LucideIcon; title: string; text: string }[] = [
   {
-    iconSrc: '', // '/icons/shield.png'
+    icon: ShieldCheck,
     title: 'Xavfsizlik',
     text: 'Faqat tasdiqlangan va ishonchli obyektlar.',
   },
   {
-    iconSrc: '', // '/icons/lightning.png'
+    icon: Zap,
     title: 'Tezkorlik',
     text: 'Bir necha daqiqada ariza yuborish va javob olish.',
   },
   {
-    iconSrc: '', // '/icons/handshake.png'
+    icon: Handshake,
     title: 'Ishonchlilik',
     text: 'Universitetlar va rasmiy hamkorlar bilan ishlaymiz.',
   },
 ];
 
-const whyCards = [
-  { iconSrc: '', color: 'green',  title: 'Tasdiqlangan turar joylar',  text: 'Barcha obyektlar tekshirilgan va tasdiqlangan.' },        // '/icons/verified.png'
-  { iconSrc: '', color: 'blue',   title: 'Universitet integratsiyasi', text: "Rasmiy universitetlar bilan to'g'ridan-to'g'ri integratsiya." }, // '/icons/graduation.png'
-  { iconSrc: '', color: 'orange', title: 'Real vaqt statistikasi',     text: "Joy soni, bandlik va navbat haqida real vaqt ma'lumot." }, // '/icons/stats.png'
-  { iconSrc: '', color: 'purple', title: 'Onlayn arizalar',            text: "Ariza yuborish jarayoni to'liq onlayn va juda oson." },    // '/icons/application.png'
-  { iconSrc: '', color: 'green',  title: "Payme va Click to'lovlari",  text: "Xavfsiz onlayn to'lov tizimi orqali to'lov qiling." },    // '/icons/payment.png'
-  { iconSrc: '', color: 'blue',   title: 'Yagona boshqaruv tizimi',   text: 'Talabalar va turar joy egalari uchun qulay boshqaruv.' }, // '/icons/dashboard.png'
-  { iconSrc: '', color: 'orange', title: 'Xarita orqali qidiruv',     text: 'Joyashuvni xarita orqali oson toping.' },                 // '/icons/map.png'
-  { iconSrc: '', color: 'purple', title: 'Xavfsiz va shaffof xizmat', text: "Ma'lumotlaringiz himoyalangan, xizmatlarimiz shaffof." }, // '/icons/security.png'
+const whyCards: { icon: LucideIcon; color: string; title: string; text: string }[] = [
+  { icon: BadgeCheck, color: 'green', title: 'Tasdiqlangan turar joylar', text: 'Barcha obyektlar tekshirilgan va tasdiqlangan.' },
+  { icon: GraduationCap, color: 'blue', title: 'Universitet integratsiyasi', text: "Rasmiy universitetlar bilan to'g'ridan-to'g'ri integratsiya." },
+  { icon: BarChart3, color: 'orange', title: 'Real vaqt statistikasi', text: "Joy soni, bandlik va navbat haqida real vaqt ma'lumot." },
+  { icon: FileText, color: 'purple', title: 'Onlayn arizalar', text: "Ariza yuborish jarayoni to'liq onlayn va juda oson." },
+  { icon: CreditCard, color: 'green', title: "Payme va Click to'lovlari", text: "Xavfsiz onlayn to'lov tizimi orqali to'lov qiling." },
+  { icon: LayoutDashboard, color: 'blue', title: 'Yagona boshqaruv tizimi', text: 'Talabalar va turar joy egalari uchun qulay boshqaruv.' },
+  { icon: MapPin, color: 'orange', title: 'Xarita orqali qidiruv', text: 'Joyashuvni xarita orqali oson toping.' },
+  { icon: Lock, color: 'purple', title: 'Xavfsiz va shaffof xizmat', text: "Ma'lumotlaringiz himoyalangan, xizmatlarimiz shaffof." },
 ];
 
 export default async function HomePage() {
@@ -81,6 +100,8 @@ export default async function HomePage() {
   const isProvider =
     sessionUser?.role === 'UNIVERSITY_PROVIDER' || sessionUser?.role === 'PRIVATE_PROVIDER';
   const listingCta = (isProvider ? '/dashboard/listings/new' : '/auth/register') as Route;
+
+  const mapLocations = await getAllListingLocations();
 
   return (
     <>
@@ -198,10 +219,7 @@ export default async function HomePage() {
           {missionPillars.map((pillar) => (
             <div className={styles.pillar} key={pillar.title}>
               <div className={styles.pillarIcon}>
-                {pillar.iconSrc
-                  ? <Image src={pillar.iconSrc} alt={pillar.title} width={36} height={36} />
-                  : <div className={styles.iconSlot} />
-                }
+                <pillar.icon size={20} />
               </div>
               <div>
                 <h4>{pillar.title}</h4>
@@ -221,10 +239,7 @@ export default async function HomePage() {
           {whyCards.map((card) => (
             <div className={styles.whyCard} key={card.title}>
               <div className={`${styles.whyIcon} ${styles[card.color as keyof typeof styles]}`}>
-                {card.iconSrc
-                  ? <Image src={card.iconSrc} alt={card.title} width={24} height={24} />
-                  : <div className={styles.iconSlot} />
-                }
+                <card.icon size={20} />
               </div>
               <h4>{card.title}</h4>
               <p>{card.text}</p>
@@ -239,28 +254,22 @@ export default async function HomePage() {
       <section className={styles.mapSection}>
         <h2>Toshkentdagi turar joylar xaritada</h2>
         <p className={styles.mapSub}>
-          Xarita orqali sizga yaqin yotoqxona, hostel va kvartiralarni toping.
+          Saytda joylashtirilgan barcha e&#39;lonlar xaritada — yaqin yotoqxona, xona yoki kvartirani toping.
         </p>
         <div className={styles.mapWrap}>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d95883.84196894897!2d69.2401!3d41.2995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1suz!2suz!4v1699000000000!5m2!1suz!2suz"
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Toshkent xaritasi"
-          />
+          <ListingsMap locations={mapLocations} />
           <div className={styles.mapLegend}>
             <div className={styles.legendItem}>
               <div className={`${styles.legendDot} ${styles.green}`} /> Yotoqxonalar
             </div>
             <div className={styles.legendItem}>
-              <div className={`${styles.legendDot} ${styles.blue}`} /> Hostellar
+              <div className={`${styles.legendDot} ${styles.blue}`} /> Xonalar
             </div>
             <div className={styles.legendItem}>
               <div className={`${styles.legendDot} ${styles.orange}`} /> Kvartiralar
             </div>
             <div className={styles.legendItem}>
-              <div className={`${styles.legendDot} ${styles.purple}`} /> Ijaraga uylar
+              <div className={`${styles.legendDot} ${styles.purple}`} /> Hovli / Uylar
             </div>
           </div>
         </div>

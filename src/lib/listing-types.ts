@@ -45,6 +45,7 @@ export type Listing = {
   requirements: ListingRequirement[];
   customRequirement?: string;
   status: ListingStatus;
+  verified: boolean;
   viewCount: number;
   createdAt: string;
   updatedAt: string;

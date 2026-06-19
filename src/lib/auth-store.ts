@@ -19,6 +19,7 @@ export type StoredUser = {
   course?: string;
   organizationName?: string;
   gender?: "MALE" | "FEMALE";
+  phone?: string;
 };
 
 const dataDir = path.join(process.cwd(), "data");
@@ -62,6 +63,7 @@ export async function createStoredUser(input: {
   course?: string;
   organizationName?: string;
   gender?: "MALE" | "FEMALE";
+  phone?: string;
 }) {
   const users = await readUsers();
   const existing = users.find((item) => item.email.toLowerCase() === input.email.toLowerCase());
@@ -84,7 +86,8 @@ export async function createStoredUser(input: {
     faculty: input.faculty,
     course: input.course,
     organizationName: input.organizationName,
-    gender: input.gender
+    gender: input.gender,
+    phone: input.phone
   };
 
   users.push(user);
@@ -97,6 +100,35 @@ export async function setUserGender(userId: string, gender: "MALE" | "FEMALE") {
   const idx = users.findIndex((u) => u.id === userId);
   if (idx === -1) return null;
   users[idx] = { ...users[idx], gender };
+  await writeUsers(users);
+  return users[idx];
+}
+
+export async function updateUserProfile(
+  userId: string,
+  patch: { phone?: string; organizationName?: string }
+) {
+  const users = await readUsers();
+  const idx = users.findIndex((u) => u.id === userId);
+  if (idx === -1) throw new Error("Foydalanuvchi topilmadi");
+  users[idx] = { ...users[idx], ...patch };
+  await writeUsers(users);
+  return users[idx];
+}
+
+export async function changeUserPassword(
+  userId: string,
+  currentPassword: string,
+  newPassword: string
+) {
+  const users = await readUsers();
+  const idx = users.findIndex((u) => u.id === userId);
+  if (idx === -1) throw new Error("Foydalanuvchi topilmadi");
+
+  const isValid = await bcrypt.compare(currentPassword, users[idx].passwordHash);
+  if (!isValid) throw new Error("Joriy parol noto'g'ri");
+
+  users[idx] = { ...users[idx], passwordHash: await bcrypt.hash(newPassword, 10) };
   await writeUsers(users);
   return users[idx];
 }

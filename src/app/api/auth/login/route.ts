@@ -31,7 +31,8 @@ export async function POST(request: NextRequest) {
         faculty: user.faculty,
         course: user.course,
         organizationName: user.organizationName,
-        gender: user.gender
+        gender: user.gender,
+        phone: user.phone
       }),
       {
         httpOnly: true,

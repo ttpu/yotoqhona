@@ -48,10 +48,10 @@ type MenuItem = {
 const studentMenu: MenuItem[] = [
   { href: '/dashboard/dormitory/book' as Route, icon: Home, title: 'Mening yashash joyim', desc: "Yotoqxonadagi xona va yashash holatingizni ko'rish." },
   { href: '/dashboard/student' as Route, icon: FileText, title: 'Mening arizalarim', desc: 'Yotoqxona, kvartira yoki xostelga barcha arizalar.' },
-  { href: '/dashboard/student' as Route, icon: CreditCard, title: "To'lovlar", desc: "To'lovlar tarixi, Payme/Click cheklari, qarzdorliklar." },
+  { href: '/dashboard/payments' as Route, icon: CreditCard, title: "To'lovlar", desc: "To'lovlar tarixi, Payme/Click cheklari, qarzdorliklar." },
   { href: '/favorites' as Route, icon: Heart, title: 'Saqlangan joylar', desc: 'Sevimli yotoqxona va kvartiralar.' },
-  { href: '/dashboard/student' as Route, icon: Settings, title: 'Sozlamalar', desc: "Telefon, parol, til va sozlamalarni o'zgartirish." },
-  { href: '/' as Route, icon: HelpCircle, title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
+  { href: '/dashboard/settings' as Route, icon: Settings, title: 'Sozlamalar', desc: "Telefon, parol, til va sozlamalarni o'zgartirish." },
+  { href: '/dashboard/help' as Route, icon: HelpCircle, title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
 ];
 
 const universityMenu: MenuItem[] = [
@@ -59,9 +59,9 @@ const universityMenu: MenuItem[] = [
   { href: '/dashboard/dormitory' as Route, icon: Building2, title: 'Yotoqxona boshqaruvi', desc: "Qavat, xona va o'rinlar holatining umumiy ko'rinishi." },
   { href: '/dashboard/listings' as Route, icon: Home, title: "E'lonlarni boshqarish", desc: "Barcha e'lonlarni ko'rish va moderatsiya qilish." },
   { href: '/dashboard/dormitory/students' as Route, icon: Inbox, title: 'Talabalar va so\'rovlar', desc: "Talabalar ro'yxati, bron so'rovlari va joylashish holati." },
-  { href: '/dashboard/admin' as Route, icon: CreditCard, title: "To'lovlar va hisobotlar", desc: 'Tushumlar, qarzdorliklar va moliyaviy hisobotlar.' },
-  { href: '/dashboard/admin' as Route, icon: Settings, title: 'Sozlamalar', desc: 'Tashkilot va akkaunt sozlamalari.' },
-  { href: '/' as Route, icon: HelpCircle, title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
+  { href: '/dashboard/dormitory/payments' as Route, icon: CreditCard, title: "To'lovlar va hisobotlar", desc: 'Tushumlar, qarzdorliklar va moliyaviy hisobotlar.' },
+  { href: '/dashboard/settings' as Route, icon: Settings, title: 'Sozlamalar', desc: 'Tashkilot va akkaunt sozlamalari.' },
+  { href: '/dashboard/help' as Route, icon: HelpCircle, title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
 ];
 
 const privateMenu: MenuItem[] = [
@@ -70,8 +70,8 @@ const privateMenu: MenuItem[] = [
   { href: '/dashboard/provider' as Route, icon: Inbox, title: 'Arizalar', desc: "Ijaraga olish bo'yicha kelib tushgan so'rovlar." },
   { href: '/dashboard/provider' as Route, icon: CreditCard, title: "To'lovlar", desc: "Ijaraga oluvchilar to'lovlari va tushumlar." },
   { href: '/dashboard/provider' as Route, icon: ShieldCheck, title: 'Tekshiruv holati', desc: 'OneID va davlat tekshiruvi holatini ko\'rish.' },
-  { href: '/dashboard/provider' as Route, icon: Settings, title: 'Sozlamalar', desc: 'Telefon, parol va akkaunt sozlamalari.' },
-  { href: '/' as Route, icon: HelpCircle, title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
+  { href: '/dashboard/settings' as Route, icon: Settings, title: 'Sozlamalar', desc: 'Telefon, parol va akkaunt sozlamalari.' },
+  { href: '/dashboard/help' as Route, icon: HelpCircle, title: 'Yordam markazi', desc: "Tez-tez so'raladigan savollar va qo'llab-quvvatlash bilan bog'lanish." },
 ];
 
 const notificationsByRole: Record<SessionUser['role'], string[]> = {

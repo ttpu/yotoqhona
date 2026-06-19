@@ -12,7 +12,8 @@
     "db:generate": "prisma generate",
     "db:studio": "prisma studio",
     "seed:demo": "tsx scripts/seed-demo.ts",
-    "seed:dormitory": "tsx scripts/seed-dormitory.ts"
+    "seed:dormitory": "tsx scripts/seed-dormitory.ts",
+    "seed:payments": "tsx scripts/seed-payments.ts"
   },
   "repository": {
     "type": "git",
